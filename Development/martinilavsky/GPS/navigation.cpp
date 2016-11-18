@@ -21,7 +21,7 @@ nav_point nav_map [3] =
 };
 
 //
-// Funkcia for finding closest node
+// Funkction for finding closest node
 // @longtitude, 
 // @latitude,
 //
@@ -44,7 +44,7 @@ int find_closest_point(double longitude,double latitude)
 }
 
 //
-// Funkcia for degree calculation based on quadrant
+// Function for degree calculation based on quadrant
 // @x, difference between x-axis values of start and end node
 // @y, difference between y-axis values of start and end node
 // @degree, degree calculated for first quadrant
