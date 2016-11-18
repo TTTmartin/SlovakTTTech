@@ -6,7 +6,7 @@
 #define ACCURACY 2
 
 
-//štruktúra pre bod na mape
+//map node structure
 struct nav_point{  
 
     double longitude;
@@ -21,9 +21,9 @@ nav_point nav_map [3] =
 };
 
 //
-// Funkcia na nájdenie najbližšieho bodu mapu
-// @longtitude, zemepisna sirka
-// @latitude, zemepisna dlzka
+// Funkcia for finding closest node
+// @longtitude, 
+// @latitude,
 //
 
 int find_closest_point(double longitude,double latitude)
@@ -44,10 +44,10 @@ int find_closest_point(double longitude,double latitude)
 }
 
 //
-// Funkcia na prepoèítanie hodnoty stupòa pod¾a kvadrant v ktorom sa nachádza
-// @x, rozdiel medzi xovymi suradnic bodu zaciatku a konca
-// @y, rozdiel medzi ynovymi suradnic bodu zaciatku a konca
-// @degree, uhol vypoèítany pre prvý kvadrant
+// Funkcia for degree calculation based on quadrant
+// @x, difference between x-axis values of start and end node
+// @y, difference between y-axis values of start and end node
+// @degree, degree calculated for first quadrant
 //
 int degree_based_on_sector(double x,double y,double degree)
 {
@@ -67,9 +67,9 @@ int degree_based_on_sector(double x,double y,double degree)
 }
 
 //
-// Funkcia na vypoèíta uhol potrebný na dosiahnutie bodu end z bodu start
-// @start, zaèiatoèný bod
-// @end, koncový bod
+// Function to calculate degree between two nodes
+// @start, start node
+// @end, end node
 //
 double calculate_compass_degree(nav_point start,nav_point end)
 {
@@ -79,9 +79,9 @@ double calculate_compass_degree(nav_point start,nav_point end)
 }
 
 //
-// Funkcia zistí, èi sa nachádza bod actual v blízkosti bodu dest
-// @actual, aktuálny bod
-// @dest, cie¾ový bod
+// Function to determinde ich actual node is in defined range of end node
+// @actual, actual node
+// @dest, end node
 //
 bool is_in_node(nav_point actual,nav_point dest)
 {
