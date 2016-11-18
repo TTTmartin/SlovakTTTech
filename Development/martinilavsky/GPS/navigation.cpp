@@ -6,7 +6,7 @@
 #define ACCURACY 2
 
 
-//structe for map node
+//štruktúra pre bod na mape
 struct nav_point{  
 
     double longitude;
@@ -19,6 +19,12 @@ nav_point nav_map [3] =
     {3, 1 },
     {3, 3 }
 };
+
+//
+// Funkcia na nájdenie najbližšieho bodu mapu
+// @longtitude, zemepisna sirka
+// @latitude, zemepisna dlzka
+//
 
 int find_closest_point(double longitude,double latitude)
 {
@@ -37,6 +43,12 @@ int find_closest_point(double longitude,double latitude)
   return min_index;
 }
 
+//
+// Funkcia na prepoèítanie hodnoty stupòa pod¾a kvadrant v ktorom sa nachádza
+// @x, rozdiel medzi xovymi suradnic bodu zaciatku a konca
+// @y, rozdiel medzi ynovymi suradnic bodu zaciatku a konca
+// @degree, uhol vypoèítany pre prvý kvadrant
+//
 int degree_based_on_sector(double x,double y,double degree)
 {
 	if(x>=0 && y>=0) //1.st sector
@@ -54,6 +66,11 @@ int degree_based_on_sector(double x,double y,double degree)
 	}
 }
 
+//
+// Funkcia na vypoèíta uhol potrebný na dosiahnutie bodu end z bodu start
+// @start, zaèiatoèný bod
+// @end, koncový bod
+//
 double calculate_compass_degree(nav_point start,nav_point end)
 {
 	double x = end.longitude-start.latitude;
@@ -61,6 +78,11 @@ double calculate_compass_degree(nav_point start,nav_point end)
 	return degree_based_on_sector(x,y,atan(abs(x)/abs(y)) * (180/PI));
 }
 
+//
+// Funkcia zistí, èi sa nachádza bod actual v blízkosti bodu dest
+// @actual, aktuálny bod
+// @dest, cie¾ový bod
+//
 bool is_in_node(nav_point actual,nav_point dest)
 {
 	if(sqrt(pow(actual.longitude - dest.longitude,2)+pow(actual.latitude - dest.latitude,2)) <= ACCURACY)
