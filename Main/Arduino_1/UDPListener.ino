@@ -2,7 +2,7 @@
 #include <Ethernet.h>
 #include <EthernetUDP.h>
 
-// premenne, ktore zavisia od umiestnenia Arduina (ktore je to koleso)
+// variables which depend on Arduino placement (which wheel it is)
 #define macNumber 0x01
 #define arduinoNumber '1'
 
@@ -19,6 +19,9 @@ char packetBuffer[UDP_TX_PACKET_MAX_SIZE];
 EthernetUDP Udp;
 
 
+//
+// Runs on Arduino startup only once, initializes and sets the initial values.
+//
 void setup() {
   analogWrite(pwmMotorPin, neutralMotorLevel);
   ackSuccess[2] = arduinoNumber;
@@ -45,6 +48,9 @@ void setup() {
 }
 
 
+//
+// Loops consecutively, allowing program to change and respond.
+//
 void loop() {
   int packetSize = Udp.parsePacket();
   if (packetSize) {
@@ -87,4 +93,3 @@ void loop() {
     Udp.endPacket();
   }
 }
-
