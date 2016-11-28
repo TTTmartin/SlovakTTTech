@@ -17,9 +17,45 @@ def steering_control():
         print(gps1.degree)
         time.sleep(1)
 
+# Finds closest clear degree to direction degree
+# returns int degree, if there are 2 same closest degrees, then returns list
+#@direction, main degree
+#@range_list, list of degrees 0-359 1-clear 0-blocked
+def find_closest_degree(direction,range_list):
+    left=0
+    right=0
+
+    x=direction
+    while (range_list[x] != 1):
+        right+=1
+        x=(x+1)%360
+
+    x=direction
+    while (range_list[x] != 1):
+        left+=1
+        x=(x-1)%360
+
+    if(right<left):
+        return (direction+right)%360
+    elif (left<right):
+        return (direction-left)%360
+    else:
+        return [(direction+right)%360,(direction-left)%360]
+
+
+#testing
 laser1 = laser.Laser()
 gps1 = gps.Gps()
 compas1 = compass.Compass()
+
+range_list = []
+for x in range(0, 360):
+    range_list.append(1)
+for x in range(10, 31):
+    range_list[x]=0
+
+print(range_list)
+print(find_closest_degree(20,range_list))
 
 t1= Thread(target = listen_on_interface)
 t2= Thread(target = steering_control)
