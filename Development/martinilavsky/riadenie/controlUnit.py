@@ -14,7 +14,8 @@ def listen_on_interface():
 # Controling steering based on data from interface
 def steering_control():
     while True:
-        print(gps1.degree)
+        closest_free_degrees = find_closest_degree(return_relative_degree(compas1.degree,gps1.degree),laser1.range_list)
+        print(closest_free_degrees)
         time.sleep(1)
 
 
@@ -43,6 +44,11 @@ def find_closest_degree(direction, range_list):
     else:
         return [(direction+right) % 360, (direction-left) % 360]
 
+# Returns relative degree of next GPS point
+# @compass_degree, geographical degree return by compass
+# @gps_degree, geographical degree of next destination
+def return_relative_degree(compass_degree, gps_degree):
+    return gps_degree - compass_degree if gps_degree - compass_degree > 0 else gps_degree - compass_degree + 360
 
 #testing
 laser1 = laser.Laser()

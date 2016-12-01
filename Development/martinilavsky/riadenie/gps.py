@@ -3,7 +3,7 @@ class Gps:
 
     #Constructor
     def __init__(self):
-        self.degree = 0.0
+        self.degree = 0
 
 
     # Degree setter
