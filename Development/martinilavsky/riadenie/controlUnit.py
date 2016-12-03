@@ -14,34 +14,41 @@ def listen_on_interface():
 # Controling steering based on data from interface
 def steering_control():
     while True:
-        print(gps1.degree)
+        closest_free_degrees = find_closest_degree(return_relative_degree(compas1.degree,gps1.degree),laser1.range_list)
+        print(closest_free_degrees)
         time.sleep(1)
 
-# Finds closest clear degree to direction degree
-# returns int degree, if there are 2 same closest degrees, then returns list
+
+# Finds closest clear degrees to direction degree
+# returns 2 fields with degree, first is the closer one
 #@direction, main degree
 #@range_list, list of degrees 0-359 1-clear 0-blocked
-def find_closest_degree(direction,range_list):
-    left=0
-    right=0
+def find_closest_degree(direction, range_list):
+    left = 0
+    right = 0
+
+    x = direction
+    while range_list[x] != 1:
+        right += 1
+        x = (x+1) % 360
 
     x=direction
-    while (range_list[x] != 1):
-        right+=1
-        x=(x+1)%360
-
-    x=direction
-    while (range_list[x] != 1):
-        left+=1
-        x=(x-1)%360
+    while range_list[x] != 1:
+        left += 1
+        x = (x-1) % 360
 
     if(right<left):
-        return (direction+right)%360
+        return [(direction+right) % 360, (direction-left) % 360]
     elif (left<right):
-        return (direction-left)%360
+        return [(direction-left) % 360, (direction+right) % 360]
     else:
-        return [(direction+right)%360,(direction-left)%360]
+        return [(direction+right) % 360, (direction-left) % 360]
 
+# Returns relative degree of next GPS point
+# @compass_degree, geographical degree return by compass
+# @gps_degree, geographical degree of next destination
+def return_relative_degree(compass_degree, gps_degree):
+    return gps_degree - compass_degree if gps_degree - compass_degree > 0 else gps_degree - compass_degree + 360
 
 #testing
 laser1 = laser.Laser()
