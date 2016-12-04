@@ -10,6 +10,6 @@ class Laser:
     def setRange(self, range_list):
         for x in range(0, 360):
             if range_list[x] == 1:
-                self.range_list.append(1)
+                self.range_list[x]=1
             else:
-                self.range_list.append(0)
+                self.range_list[x]=0
