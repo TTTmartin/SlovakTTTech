@@ -1,34 +1,45 @@
 #include <SPI.h>
+#include <Servo.h>
 #include <Ethernet.h>
 #include <EthernetUDP.h>
 
-// variables which depend on Arduino placement (which wheel it is)
-#define macNumber 0x01
-#define arduinoNumber '1'
+// constants which are unique for every Arduino
+// last hexa number pair in Arduino MAC address
+#define MAC_NUMBER 0x01
+// Arduino number used for identification
+#define ARDUINO_NUMBER '1'
 
-#define masterRpiIp "192.168.1.200"
-#define pwmMotorPin 9
-#define neutralMotorLevel 128
+// fixed constants
+// IP address of master Raspberry Pi (RPI)
+#define MASTER_RPI_IP "192.168.1.200"
+// output pin on Arduino which is used to control the motor
+#define PWM_MOTOR_PIN 9
+// if this value is set to PWM_MOTOR_PIN, the motor will not move
+#define NEUTRAL_MOTOR_LEVEL 90
 
-
+// global variables
+// port used for communication between Arduino and RPI
 const unsigned int localPort = 5000;
-byte mac[] = { 0x22, 0x22, 0x22, 0x00, 0x00, macNumber };
+// unique MAC address of Arduino
+byte mac[] = { 0x22, 0x22, 0x22, 0x00, 0x00, MAC_NUMBER };
+// message sent for RPI when Arduino sets new motor speed succesfully (X is changed later)
 String ackSuccess = "10X11021";
 
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE];
 EthernetUDP Udp;
+Servo motor;
 
-
-//
-// Runs on Arduino startup only once, initializes and sets the initial values.
-//
+// function runs only once when Arduino starts
 void setup() {
-  analogWrite(pwmMotorPin, neutralMotorLevel);
-  ackSuccess[2] = arduinoNumber;
+  // set motor not to move
+  motor.attach(PWM_MOTOR_PIN, 800, 2200); //800 a 2200 treba vyladit
+  motor.write(NEUTRAL_MOTOR_LEVEL);
+  ackSuccess[2] = ARDUINO_NUMBER;
     
   Serial.begin(9600);
   Serial.println("Program has started setup");
 
+  // waiting for IP address from DHCP on RPI
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP");
     for(;;);
@@ -36,24 +47,25 @@ void setup() {
 
   Udp.begin(localPort);
   Serial.println("Program has ended setup succesfully");
-  
-  String header = "10" + (String) arduinoNumber + "1100";
+
+  // notify RPI about obtained IP address from DHCP
+  String header = "10" + (String) ARDUINO_NUMBER + "1100";
   IPAddress localIp = Ethernet.localIP();
   String notify = header + (String)localIp[0] + '.' + (String)localIp[1] + '.' + (String)localIp[2] + '.' + (String)localIp[3]; 
   Serial.println(notify);
-  Udp.beginPacket(masterRpiIp, localPort);
+  Udp.beginPacket(MASTER_RPI_IP, localPort);
   Udp.print(notify);
   Udp.endPacket();
   Serial.println("Sent notify udp packet");
 }
 
-
-//
-// Loops consecutively, allowing program to change and respond.
-//
+// function runs in loop
 void loop() {
   int packetSize = Udp.parsePacket();
+  
+  // if there is a packet which is not empty, it will process it
   if (packetSize) {
+    // debug information
     Serial.print("Received packet of size ");
     Serial.println(packetSize);
     Serial.print("From ");
@@ -66,30 +78,35 @@ void loop() {
     }
     Serial.print(", port ");
     Serial.println(Udp.remotePort());
+    // debug information end
 
     Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
 
-    if ((packetBuffer[0] == '0') && (packetBuffer[1] == '1') && (packetBuffer[2] == '1') && (packetBuffer[3] == '0') && (packetBuffer[4] == arduinoNumber) && (packetBuffer[5] == '0') && (packetBuffer[6] == '1')) {
-      Serial.println("It is instruction");
-      String wheelSpeed = "";
-
-      for (int i = 0; i < 3; i++) {
-        wheelSpeed = wheelSpeed + (String) packetBuffer[7 + i];
-      }
-
-      int wheelSpeedInt = wheelSpeed.toInt();
-      Serial.println(wheelSpeed.toInt());
-
-      if ((wheelSpeedInt >= 0) && (wheelSpeedInt <= 255)) {
-         analogWrite(pwmMotorPin, wheelSpeedInt);
-      }
-      
-    }
     Serial.println("Content:");
     Serial.println(packetBuffer);
 
-    Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
-    Udp.print(ackSuccess);
-    Udp.endPacket();
+    // if condition pass instruction with new wheel speed is for this Arduino
+    if ((packetBuffer[0] == '0') && (packetBuffer[1] == '1') && (packetBuffer[2] == '1') && (packetBuffer[3] == '0') && (packetBuffer[4] == ARDUINO_NUMBER) && (packetBuffer[5] == '0') && (packetBuffer[6] == '1')) {
+      Serial.println("Instruction to set motor speed for this Arduino has arrived");
+      String wheelSpeed = "";
+
+      // parse new wheel speed from packet
+      for (int i = 7; i < sizeof(packetBuffer); i++) {
+        wheelSpeed = wheelSpeed + (String) packetBuffer[i];
+      }
+      
+      int wheelSpeedInt = wheelSpeed.toInt();
+      Serial.println(wheelSpeed.toInt());
+
+      // if new wheel speed is valid, it will be set to motor
+      if ((wheelSpeedInt >= 0) && (wheelSpeedInt <= 180)) {
+        motor.write(wheelSpeedInt);
+
+        // send message about success speed update
+        Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
+        Udp.print(ackSuccess);
+        Udp.endPacket();
+      }
+    }
   }
 }
