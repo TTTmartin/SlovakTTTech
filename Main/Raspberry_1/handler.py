@@ -4,13 +4,26 @@ import threading
 import time
 import socket
 
+# Constants for UDP packets
+WHEEL_PORT = 8000
+
+# Constants for data storage
 wheelList = []
 help_array = []
 
+
 # Constants for speed control.
-MOVE_FORWARD = 190
-BRAKE = 90
-MOVE_BACKWARD = 50
+MOVE_FORWARD_MAX = 180
+MOVE_FORWARD_AVERAGE = 135
+SPEED_NEUTRAL = 90
+MOVE_BACKWARD_MAX = 0
+MOVE_BACKWARD_AVERAGE = 45
+
+# Constants for direction decision
+CAMERA_ANGLE_OK = 45
+
+# Helper constants
+camera_data = 80
 
 
 # Model for saving information about wheel IP address and number
@@ -31,7 +44,15 @@ class UdpListener(threading.Thread):
         listen(self.ip, self.port)
 
 
-def send_packet(ip, port, wheel_number):
+def proces_laser(laser_data):
+    return 1;
+
+
+# Function to send UDP packet to devices in network
+# @ip, IP address of device
+# @port, specific port
+# @wheel_number, specific wheel number
+def send_packet(ip, port, wheel_number, speed):
     # join is faster '+' is an O(n^2) operation (compared to O(n) for join)
     # 0 - message from central unit
     # 1 - source board is raspberry pi
@@ -39,12 +60,11 @@ def send_packet(ip, port, wheel_number):
     # 0 - destination board is arduino
     # wheel_number - # of destination board
     # 1 - type of message is instruction
-    data = "".join(["0110", str(wheel_number), "1", str(MOVE_FORWARD)])
+    data = "".join(["0110", str(wheel_number), "1", str(speed)])
     print(data)
     # calculate bad checksum, seen via Wireshark!!! diskutuj o tom
-    sock = socket.socket(socket.AF_INET,  # Internet
-                            socket.SOCK_DGRAM)  # UDP
-    sock.sendto(data.encode(), (ip, 8000))
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.sendto(data.encode(), (ip, WHEEL_PORT))
 
 
 # Function to send speed instruction
@@ -52,10 +72,35 @@ def send_speed_instruction():
     for i in range(len(help_array)):
         print("IP address: ", help_array[i].ipAddress, "number: ", help_array[i].wheelNumber)
 
+    # send faster speed to right wheels and slower to left wheels
+    if (proces_laser("10")) and (camera_data > CAMERA_ANGLE_OK):
+        # choose wheel from list
+        wheel = [x for x in help_array if x.wheelNumber == 1]
+        send_packet(wheel[0].ipAddress, WHEEL_PORT, 1, MOVE_FORWARD_MAX)
+        wheel = [x for x in help_array if x.wheelNumber == 3]
+        send_packet(wheel[0].ipAddress, WHEEL_PORT, 3, MOVE_FORWARD_MAX)
+        wheel = [x for x in help_array if x.wheelNumber == 2]
+        send_packet(wheel[0].ipAddress, WHEEL_PORT, 2, MOVE_BACKWARD_AVERAGE)
+        wheel = [x for x in help_array if x.wheelNumber == 4]
+        send_packet(wheel[0].ipAddress, WHEEL_PORT, 4, MOVE_BACKWARD_AVERAGE)
+
+    # send faster speed to left wheels and slower to right wheels
+    if (proces_laser("10")) and (camera_data < CAMERA_ANGLE_OK):
+        # choose wheel from list
+        wheel = [x for x in help_array if x.wheelNumber == 1]
+        send_packet(wheel[0].ipAddress, WHEEL_PORT, 1, MOVE_BACKWARD_AVERAGE)
+        wheel = [x for x in help_array if x.wheelNumber == 3]
+        send_packet(wheel[0].ipAddress, WHEEL_PORT, 3, MOVE_BACKWARD_AVERAGE)
+        wheel = [x for x in help_array if x.wheelNumber == 2]
+        send_packet(wheel[0].ipAddress, WHEEL_PORT, 2, MOVE_FORWARD_MAX)
+        wheel = [x for x in help_array if x.wheelNumber == 4]
+        send_packet(wheel[0].ipAddress, WHEEL_PORT, 4, MOVE_FORWARD_MAX)
+
+
     # choose wheel, for example #2
-    pom = [x for x in help_array if x.wheelNumber == 2]
-    print(pom[0].ipAddress)
-    send_packet(pom[0].ipAddress, 8000, pom[0].wheelNumber)
+    # pom = [x for x in help_array if x.wheelNumber == 2]
+    # print(pom[0].ipAddress)
+    # send_packet(pom[0].ipAddress, 8000, pom[0].wheelNumber)
 
 
 # Function to save received IP address of device.
