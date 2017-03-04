@@ -5,7 +5,9 @@ import time
 import socket
 
 # Constants for UDP packets
-WHEEL_PORT = 8000
+from distlib.compat import raw_input
+
+WHEEL_PORT = 5000
 
 # Constants for data storage
 wheelList = []
@@ -13,8 +15,8 @@ help_array = []
 
 
 # Constants for speed control.
-MOVE_FORWARD_MAX = 180
-MOVE_FORWARD_AVERAGE = 135
+MOVE_FORWARD_MAX = 105
+MOVE_FORWARD_AVERAGE = 95
 SPEED_NEUTRAL = 90
 MOVE_BACKWARD_MAX = 0
 MOVE_BACKWARD_AVERAGE = 45
@@ -59,9 +61,9 @@ def send_packet(ip, port, wheel_number, speed):
     # 1 - # of source board is 1
     # 0 - destination board is arduino
     # wheel_number - # of destination board
-    # 1 - type of message is instruction
-    data = "".join(["0110", str(wheel_number), "1", str(speed)])
-    print(data)
+    # 01 - type of message is instruction
+    print('tu')
+    data = "".join(["0110", str(wheel_number), "01", str(speed)])
     # calculate bad checksum, seen via Wireshark!!! diskutuj o tom
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(data.encode(), (ip, WHEEL_PORT))
@@ -69,10 +71,12 @@ def send_packet(ip, port, wheel_number, speed):
 
 # Function to send speed instruction
 def send_speed_instruction():
-    for i in range(len(help_array)):
-        print("IP address: ", help_array[i].ipAddress, "number: ", help_array[i].wheelNumber)
+    print('tu')
+    for wheel in wheelList:
+        # print(" IP address: ", wheel.ipAddress, "number: ", wheel.wheelNumber)
+        send_packet(wheel.ipAddress, WHEEL_PORT, wheel.wheelNumber, MOVE_FORWARD_MAX)
 
-    # send faster speed to right wheels and slower to left wheels
+    '''# send faster speed to right wheels and slower to left wheels
     if (proces_laser("10")) and (camera_data > CAMERA_ANGLE_OK):
         # choose wheel from list
         wheel = [x for x in help_array if x.wheelNumber == 1]
@@ -95,7 +99,7 @@ def send_speed_instruction():
         send_packet(wheel[0].ipAddress, WHEEL_PORT, 2, MOVE_FORWARD_MAX)
         wheel = [x for x in help_array if x.wheelNumber == 4]
         send_packet(wheel[0].ipAddress, WHEEL_PORT, 4, MOVE_FORWARD_MAX)
-
+    '''
 
     # choose wheel, for example #2
     # pom = [x for x in help_array if x.wheelNumber == 2]
@@ -107,10 +111,11 @@ def send_speed_instruction():
 # @data, data sent in packet
 def wait_for_ip_address(data):
     # check for notified IP address
-    if data[:2] == "10" and data[3:7] == "1100":
-        wheelList.append(IpWheel(data[7:], data[2]))
-        print("New wheel with ip ", wheelList[1].ipAddress)
-        print("And number ", wheelList[1].wheelNumber)
+    if data[:2] == '10' and data[3:7] == '1100':
+        new_wheel = IpWheel(data[7:], data[2])
+        wheelList.append(new_wheel)
+        #print("New wheel with ip ", new_wheel.ipAddress)
+        #print("And number ", new_wheel.wheelNumber)
 
 
 # Function to listen on ip and port.
@@ -119,44 +124,39 @@ def listen(ip, port):
     global help_array
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-    # variable for testing
-    help_array.append(IpWheel("192.168.1.1", 1))
-    help_array.append(IpWheel("192.168.1.2", 2))
-    help_array.append(IpWheel("192.168.1.3", 3))
-    help_array.append(IpWheel("192.168.1.4", 4))
-
     try:
         # bind IP and port
         sock.bind((ip, port))
     except socket.error:
         print("already bind")
 
-    send_speed_instruction()
+        #send_speed_instruction()
     while True:
-        '''
+
         data, addr = sock.recvfrom(1024)
-        print("receive message: ", data)
+        #print("receive message: ", data.decode())
 
         # if not all IP address received
-        if len(wheelList) != 4:
-           wait_for_ip_address(data)
-        send_speed_instruction()
-        '''
+        if len(wheelList) < 4:
+            wait_for_ip_address(data.decode())
+            print(len(wheelList))
+        if len(wheelList) == 4:
+            for wheel in wheelList:
+                print(" IP address: ", wheel.ipAddress, "number: ", wheel.wheelNumber)
+                if wheel.wheelNumber == '1' or wheel.wheelNumber == '4':
+                    send_packet(wheel.ipAddress, WHEEL_PORT, wheel.wheelNumber, 110)
+                if wheel.wheelNumber == '2' or wheel.wheelNumber == '3':
+                    send_packet(wheel.ipAddress, WHEEL_PORT, wheel.wheelNumber, 50)
 
-
-        '''
-        if data[:2] == "10" and data[3:7] == "1100":
-            wheelList.append(IpWheel(data[7:], data[2]))
-            print("New wheel with ip ", wheelList[1].ipAddress)
-            print("And number ", wheelList[1].wheelNumber)
-        '''
-
-
+            '''userInput = raw_input('WASD: ')
+            if userInput == 'w':
+                send_speed_instruction(10)
+                # send_packet(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, MOVE_FORWARD_MAX)
+'''
 
 print("Program started")
-wheelList.append(IpWheel("10.10", "6"))
 
-UDP_IP = "147.175.182.7"
+UDP_IP = "192.168.1.200"
 # UDP_IP = "192.168.1.200"
 UDP_PORT = 5000
 
