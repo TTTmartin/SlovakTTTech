@@ -1,14 +1,16 @@
+import laser
+
 notify_message = "010000000000"
 instructionAck_message = "010000000002"
 infraRed_message = "01000000000311"
 roadSide_message = "010101000004050102030405"
-laser_message = "010201000005030102030405060708090A0B0C"
+laser_message = "010201000005010002001E015E0050"
 
 # configurable variable to set starting index of protocol
 INDEX_OF_PACKET_BYTE = 0
 
 # actual message
-message = roadSide_message
+message = laser_message
 
 # convert 2 bytes to int representation of their hex value
 packet_type = int("".join([message[INDEX_OF_PACKET_BYTE], message[INDEX_OF_PACKET_BYTE + 1]]),16)
@@ -68,29 +70,36 @@ def process_road_side_camera():
 
 
 # Function for processing laser packet.
-def process_laser():
+def process_laser(laser_message):
+    # laser_message = "010201000005010102030405060708"
     # count of records
     # convert 2 bytes to int representation of their hex value
-    number_of_records = int("".join([message[INDEX_OF_PACKET_BYTE + 12], message[INDEX_OF_PACKET_BYTE + 13]]), 16)
+    number_of_records = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 12], laser_message[INDEX_OF_PACKET_BYTE + 13]]), 16)
     print("count of lase data: ", number_of_records)
     print("laser data: \n")
+    laser_list = []
     index = 0
     count = 0
     # iterating over numbers of road side data from camera, message[6] represents count of numbers
     for index in range(0, number_of_records):
         # TODO: save to structure
         # get specific entry
-        start_angle = int("".join([message[INDEX_OF_PACKET_BYTE + 14 + count], message[INDEX_OF_PACKET_BYTE + 14 + count + 1]]), 16)
-        end_angle = int("".join([message[INDEX_OF_PACKET_BYTE + 14 + count + 2], message[INDEX_OF_PACKET_BYTE + 14 + count + 3]]), 16)
-        start_direction = int("".join([message[INDEX_OF_PACKET_BYTE + 14 + count + 4], message[INDEX_OF_PACKET_BYTE + 14 + count + 5]]), 16)
-        end_direction = int("".join([message[INDEX_OF_PACKET_BYTE + 14 + count + 6], message[INDEX_OF_PACKET_BYTE + 14 + count + 7]]), 16)
+        start_angle = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 14 + count], laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 1],
+                                   laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 2], laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 3]]), 16)
+        start_distance = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 4], laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 5] ,
+                                      laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 6], laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 7]]), 16)
+        end_angle = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 8], laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 9],
+                                 laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 10], laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 11]]), 16)
+        end_distance = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 12], laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 13],
+                                    laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 14], laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 15]]), 16)
+        laser_list.append(laser(start_angle, start_distance, end_angle, end_distance))
         print(start_angle)
         print(end_angle)
-        print(start_direction)
-        print(end_direction)
+        print(start_distance)
+        print(end_distance)
         print("\n")
         count += 8
-
+    return laser_list
 
 # map the message type to processing function
 message_types = {

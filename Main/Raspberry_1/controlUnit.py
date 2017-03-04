@@ -44,6 +44,7 @@ def find_closest_degree(direction, range_list):
     else:
         return [(direction+right) % 360, (direction-left) % 360]
 
+
 # Returns relative degree of next GPS point
 # @compass_degree, geographical degree return by compass
 # @gps_degree, geographical degree of next destination
