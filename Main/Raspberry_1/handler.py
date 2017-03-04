@@ -71,7 +71,8 @@ def send_packet(ip, port, wheel_number, speed):
 def send_speed_instruction():
     for i in range(len(help_array)):
         print("IP address: ", help_array[i].ipAddress, "number: ", help_array[i].wheelNumber)
-
+    wheel = [x for x in help_array if (x.wheelNumber == 1 or x.wheelNumber == 2)]
+    print(len(wheel))
     # send faster speed to right wheels and slower to left wheels
     if (proces_laser("10")) and (camera_data > CAMERA_ANGLE_OK):
         # choose wheel from list
