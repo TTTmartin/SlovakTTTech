@@ -1,13 +1,10 @@
 #include <SPI.h>
 #include <Servo.h>
-#include <Ethernet.h>
-#include <EthernetUDP.h>
+#include <Ethernet2.h>
 
 // constants which are unique for every Arduino
-// last hexa number pair in Arduino MAC address
-#define MAC_NUMBER 0x01
 // Arduino number used for identification
-#define ARDUINO_NUMBER '1'
+#define ARDUINO_NUMBER '4'
 
 // fixed constants
 // IP address of master Raspberry Pi (RPI)
@@ -21,7 +18,7 @@
 // port used for communication between Arduino and RPI
 const unsigned int localPort = 5000;
 // unique MAC address of Arduino
-byte mac[] = { 0x22, 0x22, 0x22, 0x00, 0x00, MAC_NUMBER };
+byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xD3 };
 // message sent for RPI when Arduino sets new motor speed succesfully (X is changed later)
 String ackSuccess = "10X11021";
 
@@ -32,7 +29,7 @@ Servo motor;
 // function runs only once when Arduino starts
 void setup() {
   // set motor not to move
-  motor.attach(PWM_MOTOR_PIN, 800, 2200); //800 a 2200 treba vyladit
+  motor.attach(PWM_MOTOR_PIN); //800 a 2200 treba vyladit
   motor.write(NEUTRAL_MOTOR_LEVEL);
   ackSuccess[2] = ARDUINO_NUMBER;
     
@@ -42,9 +39,10 @@ void setup() {
   // waiting for IP address from DHCP on RPI
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP");
-    for(;;);
+    for(;;)
+      ;
   }
-
+  
   Udp.begin(localPort);
   Serial.println("Program has ended setup succesfully");
 
@@ -96,17 +94,18 @@ void loop() {
       }
       
       int wheelSpeedInt = wheelSpeed.toInt();
-      Serial.println(wheelSpeed.toInt());
+      Serial.println(wheelSpeedInt);
 
       // if new wheel speed is valid, it will be set to motor
       if ((wheelSpeedInt >= 0) && (wheelSpeedInt <= 180)) {
         motor.write(wheelSpeedInt);
-
+        Serial.println("Speed was set");
         // send message about success speed update
         Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
         Udp.print(ackSuccess);
         Udp.endPacket();
       }
     }
+    memset(packetBuffer, 0, sizeof(packetBuffer));
   }
 }
