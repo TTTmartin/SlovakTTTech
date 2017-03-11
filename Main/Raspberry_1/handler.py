@@ -15,6 +15,7 @@ WHEEL_PORT = 5000
 # Constants for data storage
 wheelList = []
 laserList = []
+
 help_array = []
 
 # file for logging
@@ -29,6 +30,7 @@ MOVE_BACKWARD = 20
 MIN_DISTANCE = 50
 DIRECTION = 190
 ANGLE_CONSTANT = 10
+
 
 INDEX_OF_PACKET_BYTE = 0
 
@@ -53,6 +55,7 @@ class LaserData:
         write_log(' New laser data: startAngle: ' + str(startAngle) + ' startDistance: ' + str(startDistance) + ' endAngle: ' + str(endAngle) + ' endDistance: ' + str(endDistance))
         print("STARTCOMPUTED: " + str(self.startComputedAngle))
         print("ENDCOMPUTED: " + str(self.endComputedAngle))
+
 
 # Initializing UDP communication.
 class UdpListener(threading.Thread):
@@ -153,6 +156,7 @@ def find_closest_degree(direction, laser_data_list):
         else:
             turn_vehicle(0, MOVE_FORWARD)
     '''
+
     x = direction
     while range_list[x] != 1:
         right += 1
@@ -169,7 +173,9 @@ def find_closest_degree(direction, laser_data_list):
         return [(direction - left) % 360, (direction + right) % 360]
     else:
         return [(direction + right) % 360, (direction - left) % 360]
+
     '''
+
 
 # Process laser data.
 # @laser_data, free angles.
@@ -268,6 +274,7 @@ def listen(ip, port):
     # 2 30 350 80 20 1500 192 55
     laserList = process_laser(laser_message)
     find_closest_degree(0, laserList)
+
     try:
         # bind IP and port
         sock.bind((ip, port))
@@ -289,6 +296,7 @@ def listen(ip, port):
         if len(wheelList) == 4:
             # sort list according to wheelNumber
             wheelList.sort(key=lambda x: x.wheelNumber)
+
             for wheel in wheelList:
                 move_vehicle(MOVE_FORWARD)
                 turn_vehicle(1, MOVE_FORWARD)
@@ -305,3 +313,4 @@ udpListenerThread = UdpListener(UDP_IP, UDP_PORT)
 udpListenerThread.start()
 
 write_log(' End of main thread')
+
