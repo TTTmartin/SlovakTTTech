@@ -4,7 +4,7 @@ import threading
 import time
 import socket
 import datetime
-import laser
+
 
 # Constants for UDP packets
 # from distlib.compat import raw_input
@@ -14,7 +14,8 @@ WHEEL_PORT = 5000
 
 # Constants for data storage
 wheelList = []
-angleList = []
+laserList = []
+
 help_array = []
 
 # file for logging
@@ -27,6 +28,9 @@ MOVE_BACKWARD = 20
 
 # Constants for laser processing.
 MIN_DISTANCE = 50
+DIRECTION = 190
+ANGLE_CONSTANT = 10
+
 
 INDEX_OF_PACKET_BYTE = 0
 
@@ -45,9 +49,12 @@ class LaserData:
         self.startDistance = startDistance
         self.endAngle = endAngle
         self.endDistance = endDistance
-        self.startComputedAngle = {True: 360 - startAngle, False: startAngle}[startAngle >= 180]
-        self.endComputedAngle = {True: 360 - endAngle, False: endAngle}[endAngle >= 180]
+        self.startComputedAngle = {True: abs(startAngle - DIRECTION), False: abs(360 - startAngle + DIRECTION)}[self.startAngle <= DIRECTION + 180]
+        self.endComputedAngle = {True: abs(endAngle - DIRECTION), False: abs(360 - endAngle + DIRECTION)}[self.endAngle <= DIRECTION + 180]
+        self.directionAngle = {True: self.startAngle, False: self.endAngle}[self.startComputedAngle <= self.endComputedAngle]
         write_log(' New laser data: startAngle: ' + str(startAngle) + ' startDistance: ' + str(startDistance) + ' endAngle: ' + str(endAngle) + ' endDistance: ' + str(endDistance))
+        print("STARTCOMPUTED: " + str(self.startComputedAngle))
+        print("ENDCOMPUTED: " + str(self.endComputedAngle))
 
 
 # Initializing UDP communication.
@@ -98,11 +105,12 @@ def process_laser(laser_message):
                                     laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 15]]), 16)
         laser_list.append(LaserData(start_angle, start_distance, end_angle, end_distance))
         print(start_angle)
-        print(end_angle)
         print(start_distance)
+        print(end_angle)
         print(end_distance)
         print("\n")
-        count += 8
+
+        count += 16
     return laser_list
 
 
@@ -110,9 +118,44 @@ def process_laser(laser_message):
 # returns 2 fields with degree, first is the closer one
 # @direction, main degree
 # @range_list, list of degrees 0-359 d-distance 0-blocked
-def find_closest_degree(direction, range_list):
+def find_closest_degree(direction, laser_data_list):
     left = 0
     right = 0
+
+    laser_data_list.sort(key=lambda x: x.startComputedAngle)
+    startAngle = laser_data_list[0]
+    laser_data_list.sort(key=lambda x: x.endComputedAngle)
+    endAngle = laser_data_list[0]
+
+    move_forward_right_flag = 0
+    move_forward_left_flag = 0
+    move_forward_flag = 0
+    for data in laser_data_list:
+        if (data.startAngle < DIRECTION < data.endANgle):
+            move_forward_flag = 1
+        if (data.startAngle < (DIRECTION + ANGLE_CONSTANT) % 360 < data.endANgle):
+            move_forward_right_flag = 1
+        if (data.startAngle < (DIRECTION - ANGLE_CONSTANT) % 360 < data.endANgle):
+            move_forward_left_flag = 1
+
+    # direction clean and also with angle constants
+    if(move_forward_flag and move_forward_left_flag and move_forward_left_flag):
+        move_vehicle(MOVE_FORWARD)
+    # direction clean, right stop
+    elif(move_forward_flag and move_forward_right_flag == 0):
+        turn_vehicle(1, MOVE_FORWARD)
+    # direction clean, left stop
+    elif(move_forward_flag and move_forward_left_flag == 0):
+        turn_vehicle(0, MOVE_FORWARD)
+    # find closest angle
+    else:
+        closestAngle = {True: startAngle, False: endAngle}[startAngle.startComputedAngle <= endAngle.endComputedAngle]
+        print("Win: " + str(closestAngle.directionAngle))
+        if(closestAngle.directionAngle >=180):
+            turn_vehicle(1, MOVE_FORWARD)
+        else:
+            turn_vehicle(0, MOVE_FORWARD)
+    '''
 
     x = direction
     while range_list[x] != 1:
@@ -130,6 +173,8 @@ def find_closest_degree(direction, range_list):
         return [(direction - left) % 360, (direction + right) % 360]
     else:
         return [(direction + right) % 360, (direction - left) % 360]
+
+    '''
 
 
 # Process laser data.
@@ -224,9 +269,12 @@ def listen(ip, port):
     wheelList.append(IpWheel('192.168.1.22', 1))
     wheelList.sort(key=lambda x: x.wheelNumber)
     move_vehicle(MOVE_FORWARD)
-    laser_message = "010201000005010002001E015E0050"
-    angleList = process_laser(laser_message)
-    len(angleList)
+    laser_message = "0102010000050200C8001E015E005000A005DC00B30037"
+    #laser_message = "01020100000502 00CB 001E 015E 0050 00A0 05DC 00B3 0037"
+    # 2 30 350 80 20 1500 192 55
+    laserList = process_laser(laser_message)
+    find_closest_degree(0, laserList)
+
     try:
         # bind IP and port
         sock.bind((ip, port))
@@ -265,3 +313,4 @@ udpListenerThread = UdpListener(UDP_IP, UDP_PORT)
 udpListenerThread.start()
 
 write_log(' End of main thread')
+
