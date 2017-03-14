@@ -2,7 +2,7 @@ import laser
 
 notify_message = "010000000000"
 instructionAck_message = "010000000002"
-infraRed_message = "01000000000311"
+infraRed_message = "010000000003A5"
 roadSide_message = "010101000004050102030405"
 laser_message = "010201000005010002001E015E0050"
 
@@ -10,7 +10,7 @@ laser_message = "010201000005010002001E015E0050"
 INDEX_OF_PACKET_BYTE = 0
 
 # actual message
-message = laser_message
+message = infraRed_message
 
 # convert 2 bytes to int representation of their hex value
 packet_type = int("".join([message[INDEX_OF_PACKET_BYTE], message[INDEX_OF_PACKET_BYTE + 1]]),16)
@@ -47,9 +47,13 @@ def instruction_ack():
 def process_infrared_camera():
     # convert 2 bytes to int representation of their hex value
     data = int("".join([message[INDEX_OF_PACKET_BYTE + 12], message[INDEX_OF_PACKET_BYTE + 13]]), 16)
+    if(data >=128):
+        print("Infrared data: dolava")
+        print("Infrared data: ", data - 128)
+    else:
+        print("Infrared data: doprava")
+        print("Infrared data: ", data)
     # TODO: save to structure
-    print("infrared data: ",data)
-
 
 # Function for processing road side camera packet.
 def process_road_side_camera():

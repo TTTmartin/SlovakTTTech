@@ -70,11 +70,11 @@ class UdpListener(threading.Thread):
 
 # Function for processing laser packet.
 def process_laser(laser_message):
-    # laser_message = "010201000005010102030405060708"
+    # laser_message = "010201010100050200C8001E015E005000A005DC00B30037"
     # count of records
     # convert 2 bytes to int representation of their hex value
     number_of_records = int(
-        "".join([laser_message[INDEX_OF_PACKET_BYTE + 12], laser_message[INDEX_OF_PACKET_BYTE + 13]]), 16)
+        "".join([laser_message[INDEX_OF_PACKET_BYTE + 14], laser_message[INDEX_OF_PACKET_BYTE + 15]]), 16)
     print("count of lase data: ", number_of_records)
     print("laser data: \n")
     laser_list = []
@@ -85,21 +85,21 @@ def process_laser(laser_message):
         # TODO: save to structure
         # get specific entry
         start_angle = int("".join(
-            [laser_message[INDEX_OF_PACKET_BYTE + 14 + count], laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 1],
-             laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 2],
-             laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 3]]), 16)
-        start_distance = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 4],
-                                      laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 5],
-                                      laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 6],
-                                      laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 7]]), 16)
-        end_angle = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 8],
-                                 laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 9],
-                                 laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 10],
-                                 laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 11]]), 16)
-        end_distance = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 12],
-                                    laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 13],
-                                    laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 14],
-                                    laser_message[INDEX_OF_PACKET_BYTE + 14 + count + 15]]), 16)
+            [laser_message[INDEX_OF_PACKET_BYTE + 16 + count], laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 1],
+             laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 2],
+             laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 3]]), 16)
+        start_distance = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 4],
+                                      laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 5],
+                                      laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 6],
+                                      laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 7]]), 16)
+        end_angle = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 8],
+                                 laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 9],
+                                 laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 10],
+                                 laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 11]]), 16)
+        end_distance = int("".join([laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 12],
+                                    laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 13],
+                                    laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 14],
+                                    laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 15]]), 16)
         laser_list.append(LaserData(start_angle, start_distance, end_angle, end_distance))
         print(start_angle)
         print(start_distance)
@@ -128,11 +128,11 @@ def find_closest_degree(direction, laser_data_list):
     move_forward_left_flag = 0
     move_forward_flag = 0
     for data in laser_data_list:
-        if (data.startAngle < DIRECTION < data.endANgle):
+        if (data.startAngle < DIRECTION < data.endAngle):
             move_forward_flag = 1
-        if (data.startAngle < (DIRECTION + ANGLE_CONSTANT) % 360 < data.endANgle):
+        if (data.startAngle < (DIRECTION + ANGLE_CONSTANT) % 360 < data.endAngle):
             move_forward_right_flag = 1
-        if (data.startAngle < (DIRECTION - ANGLE_CONSTANT) % 360 < data.endANgle):
+        if (data.startAngle < (DIRECTION - ANGLE_CONSTANT) % 360 < data.endAngle):
             move_forward_left_flag = 1
 
     # direction clean and also with angle constants
@@ -188,8 +188,6 @@ def proces_laser_data(laser_data):
     # move right
     else:
         turn_vehicle(0, MOVE_FORWARD)
-
-
     return 1;
 
 
@@ -222,8 +220,17 @@ def send_speed_instruction(ip, port, wheel_number, speed):
 # @data, data sent in packet
 def wait_for_ip_address(data):
     # check for notified IP address
-    if data[:2] == '10' and data[3:7] == '1100':
-        new_wheel = IpWheel(data[7:], data[2])
+    print("zacinam arduino")
+    if data[10:14] == '0000':
+        wheel_number = int("".join([data[4],data[5]]), 16)
+        wheel_ip = ''
+        for i in range(4):
+            number =  str(int("".join([data[14+2*i], data[15+2*i]]), 16))
+            if(i!=3):
+                wheel_ip = wheel_ip + number + '.';
+            else:
+                wheel_ip = wheel_ip + number;
+        new_wheel = IpWheel(wheel_ip, wheel_number)
         wheelList.append(new_wheel)
 
 
@@ -238,7 +245,7 @@ def move_vehicle(speed):
 # Move to side.
 # @direction, 1 - left, 0 - right.
 def turn_vehicle(direction, speed):
-    write_log(' vehicle turn : ' + direction + ' speed: ' + str(speed))
+    write_log(' vehicle turn : ' + str(direction) + ' speed: ' + str(speed))
     if direction == 1:
         send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, speed)
         send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, speed)
@@ -250,6 +257,18 @@ def turn_vehicle(direction, speed):
         send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, 180 - speed)
         send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, 180 - speed)
 
+
+def process_infrared_camera(data):
+    print(data)
+
+
+def process_message(data):
+    message_type = data[10:14]
+    message_types = {
+        "0005": process_laser,
+        "0003": process_infrared_camera
+    }
+    message_types[message_type](data)
 
 # Function to listen on ip and port.
 def listen(ip, port):
@@ -263,11 +282,14 @@ def listen(ip, port):
     wheelList.append(IpWheel('192.168.1.22', 1))
     wheelList.sort(key=lambda x: x.wheelNumber)
     move_vehicle(MOVE_FORWARD)
-    laser_message = "0102010000050200C8001E015E005000A005DC00B30037"
+    laser_message = "010201010100050200C8001E015E005000A005DC00B30037"
+    camera_message = "010000000003A5"
+    arduino_message = "01000101010000C0A80116"
     #laser_message = "01020100000502 00CB 001E 015E 0050 00A0 05DC 00B3 0037"
     # 2 30 350 80 20 1500 192 55
-    laserList = process_laser(laser_message)
-    find_closest_degree(0, laserList)
+    process_message(laser_message)
+    #laserList = process_laser(laser_message)
+    #find_closest_degree(0, laserList)
     try:
         # bind IP and port
         sock.bind((ip, port))
@@ -285,18 +307,19 @@ def listen(ip, port):
 
         # if not all IP address received
         if len(wheelList) < 4:
-            wait_for_ip_address(data.decode())
+            wait_for_ip_address(str(data.decode()))
+            if len(wheelList) == 4:
+                # sort list according to wheelNumber
+                wheelList.sort(key=lambda x: x.wheelNumber)
         if len(wheelList) == 4:
-            # sort list according to wheelNumber
-            wheelList.sort(key=lambda x: x.wheelNumber)
             for wheel in wheelList:
                 move_vehicle(MOVE_FORWARD)
                 turn_vehicle(1, MOVE_FORWARD)
-
+#   TODO: posielanie rychlosti arduinu
 
 log_file = open('control_unit_log', 'w+')
 #UDP_IP = "192.168.1.200"
-UDP_IP = "147.175.182.7"
+UDP_IP = "147.175.152.40"
 UDP_PORT = 5000
 
 write_log(' control unit start')
