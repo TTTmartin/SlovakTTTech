@@ -12,18 +12,22 @@ import datetime
 # Port on which Arduino is listening.
 WHEEL_PORT = 5000
 
+
 # Constants for data storage
 wheelList = []
 laserList = []
 help_array = []
 
+
 # file for logging
 log_file = ""
+
 
 # Constants for speed control.
 MOVE_FORWARD = 105
 SPEED_NEUTRAL = 90
 MOVE_BACKWARD = 20
+
 
 # Constants for laser processing.
 MIN_DISTANCE = 50
@@ -31,6 +35,7 @@ DIRECTION = 190
 ANGLE_CONSTANT = 10
 
 INDEX_OF_PACKET_BYTE = 0
+
 
 # Model for saving information about wheel IP address and number
 class IpWheel:
@@ -53,6 +58,7 @@ class LaserData:
         write_log(' New laser data: startAngle: ' + str(startAngle) + ' startDistance: ' + str(startDistance) + ' endAngle: ' + str(endAngle) + ' endDistance: ' + str(endDistance))
         print("STARTCOMPUTED: " + str(self.startComputedAngle))
         print("ENDCOMPUTED: " + str(self.endComputedAngle))
+
 
 # Initializing UDP communication.
 class UdpListener(threading.Thread):
@@ -128,27 +134,27 @@ def find_closest_degree(direction, laser_data_list):
     move_forward_left_flag = 0
     move_forward_flag = 0
     for data in laser_data_list:
-        if (data.startAngle < DIRECTION < data.endAngle):
+        if data.startAngle < DIRECTION < data.endAngle:
             move_forward_flag = 1
-        if (data.startAngle < (DIRECTION + ANGLE_CONSTANT) % 360 < data.endAngle):
+        if data.startAngle < (DIRECTION + ANGLE_CONSTANT) % 360 < data.endAngle:
             move_forward_right_flag = 1
-        if (data.startAngle < (DIRECTION - ANGLE_CONSTANT) % 360 < data.endAngle):
+        if data.startAngle < (DIRECTION - ANGLE_CONSTANT) % 360 < data.endAngle:
             move_forward_left_flag = 1
 
     # direction clean and also with angle constants
-    if(move_forward_flag and move_forward_left_flag and move_forward_left_flag):
+    if move_forward_flag and move_forward_left_flag and move_forward_left_flag:
         move_vehicle(MOVE_FORWARD)
     # direction clean, right stop
-    elif(move_forward_flag and move_forward_right_flag == 0):
+    elif move_forward_flag and move_forward_right_flag == 0:
         turn_vehicle(1, MOVE_FORWARD)
     # direction clean, left stop
-    elif(move_forward_flag and move_forward_left_flag == 0):
+    elif move_forward_flag and move_forward_left_flag == 0:
         turn_vehicle(0, MOVE_FORWARD)
     # find closest angle
     else:
         closestAngle = {True: startAngle, False: endAngle}[startAngle.startComputedAngle <= endAngle.endComputedAngle]
         print("Win: " + str(closestAngle.directionAngle))
-        if(closestAngle.directionAngle >=180):
+        if closestAngle.directionAngle >= 180:
             turn_vehicle(1, MOVE_FORWARD)
         else:
             turn_vehicle(0, MOVE_FORWARD)
@@ -171,12 +177,13 @@ def find_closest_degree(direction, laser_data_list):
         return [(direction + right) % 360, (direction - left) % 360]
     '''
 
+
 # Process laser data.
 # @laser_data, free angles.
-def proces_laser_data(laser_data):
+def process_laser_data(laser_data):
     free_angle = find_closest_degree(0, laser_data)[0]
 
-    # stop vehicle befor turning
+    # stop vehicle before turning
     move_vehicle(SPEED_NEUTRAL)
 
     # move left
@@ -211,7 +218,8 @@ def send_speed_instruction(ip, port, wheel_number, speed):
     # 0 - destination board is arduino
     # wheel_number - # of destination board
     # 01 - type of message is instruction
-    data = "".join(["0110", str(wheel_number), "01", str(speed)])
+    # data = "".join(["0110", str(wheel_number), "01", str(speed)])
+    data = "".join(["00010100", "0" + str(wheel_number), "0001", str(format(speed,'x'))])
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(data.encode(), (ip, WHEEL_PORT))
 
@@ -220,7 +228,6 @@ def send_speed_instruction(ip, port, wheel_number, speed):
 # @data, data sent in packet
 def wait_for_ip_address(data):
     # check for notified IP address
-    print("zacinam arduino")
     if data[10:14] == '0000':
         wheel_number = int("".join([data[4],data[5]]), 16)
         wheel_ip = ''
@@ -258,10 +265,14 @@ def turn_vehicle(direction, speed):
         send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, 180 - speed)
 
 
+# Function to process data from infrared camera.
+# @data, data from camera
 def process_infrared_camera(data):
     print(data)
 
 
+# Process message type function.
+# @data, data from message
 def process_message(data):
     message_type = data[10:14]
     message_types = {
@@ -269,6 +280,31 @@ def process_message(data):
         "0003": process_infrared_camera
     }
     message_types[message_type](data)
+
+
+# Go straight function.
+def go_straight():
+    print("going straight forward")
+    move_vehicle(MOVE_FORWARD)
+
+
+# Go left function.
+def go_left():
+    print("turning left")
+    turn_vehicle(1, MOVE_FORWARD)
+
+
+# Go backward function.
+def go_back():
+    print("going backward")
+    move_vehicle(MOVE_BACKWARD)
+
+
+# Go right function.
+def go_right():
+    print("going right")
+    turn_vehicle(0, MOVE_FORWARD)
+
 
 # Function to listen on ip and port.
 def listen(ip, port):
@@ -281,13 +317,13 @@ def listen(ip, port):
     wheelList.append(IpWheel('192.168.1.8', 2))
     wheelList.append(IpWheel('192.168.1.22', 1))
     wheelList.sort(key=lambda x: x.wheelNumber)
-    move_vehicle(MOVE_FORWARD)
+    # move_vehicle(MOVE_FORWARD)
     laser_message = "010201010100050200C8001E015E005000A005DC00B30037"
     camera_message = "010000000003A5"
     arduino_message = "01000101010000C0A80116"
-    #laser_message = "01020100000502 00CB 001E 015E 0050 00A0 05DC 00B3 0037"
+    # laser_message = "01020100000502 00CB 001E 015E 0050 00A0 05DC 00B3 0037"
     # 2 30 350 80 20 1500 192 55
-    process_message(laser_message)
+    # process_message(laser_message)
     #laserList = process_laser(laser_message)
     #find_closest_degree(0, laserList)
     try:
@@ -297,8 +333,17 @@ def listen(ip, port):
         log_file.write(str(datetime.datetime.now()) + ' port already bind \n')
 
     while True:
-        data, addr = sock.recvfrom(1024)
-        write_log('receive message: ' + str(data.decode()))
+        # read user input
+        letter = input("direction: ");
+        direction_types = {
+            "w": go_straight,
+            "a": go_left,
+            "s": go_back,
+            "d": go_right
+        }
+        direction_types[letter]();
+        # data, addr = sock.recvfrom(1024)
+        # write_log('receive message: ' + str(data.decode()))
 
         # choose wheel, for example #2
         # pom = [x for x in help_array if x.wheelNumber == 2]
@@ -306,7 +351,7 @@ def listen(ip, port):
         # send_packet(pom[0].ipAddress, 8000, pom[0].wheelNumber)
 
         # if not all IP address received
-        if len(wheelList) < 4:
+        '''if len(wheelList) < 4:
             wait_for_ip_address(str(data.decode()))
             if len(wheelList) == 4:
                 # sort list according to wheelNumber
@@ -315,10 +360,11 @@ def listen(ip, port):
             for wheel in wheelList:
                 move_vehicle(MOVE_FORWARD)
                 turn_vehicle(1, MOVE_FORWARD)
-#   TODO: posielanie rychlosti arduinu
+    #   TODO: posielanie rychlosti arduinu
+        '''
 
 log_file = open('control_unit_log', 'w+')
-#UDP_IP = "192.168.1.200"
+# UDP_IP = "192.168.1.200"
 UDP_IP = "147.175.152.40"
 UDP_PORT = 5000
 
