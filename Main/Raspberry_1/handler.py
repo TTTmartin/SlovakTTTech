@@ -26,7 +26,8 @@ log_file = ""
 # Constants for speed control.
 MOVE_FORWARD = 105
 SPEED_NEUTRAL = 90
-MOVE_BACKWARD = 20
+MOVE_BRAKE = 30
+MOVE_BACKWARD = 50
 
 
 # Constants for laser processing.
@@ -212,12 +213,12 @@ def write_log(message):
 # @wheel_number, specific wheel number
 def send_speed_instruction(ip, port, wheel_number, speed):
     # join is faster '+' is an O(n^2) operation (compared to O(n) for join)
-    # 0 - message from central unit
-    # 1 - source board is raspberry pi
-    # 1 - # of source board is 1
-    # 0 - destination board is arduino
+    # 00 - message from central unit
+    # 01 - source board is raspberry pi
+    # 01 - # of source board is 1
+    # 00 - destination board is arduino
     # wheel_number - # of destination board
-    # 01 - type of message is instruction
+    # 0001 - type of message is instruction
     # data = "".join(["0110", str(wheel_number), "01", str(speed)])
     data = "".join(["00010100", "0" + str(wheel_number), "0001", str(format(speed,'x'))])
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -249,11 +250,55 @@ def move_vehicle(speed):
         send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, speed)
 
 
+# Move vehicle backward
+def move_backward():
+    write_log(' vehicle move backward: ')
+    list_length = len(wheelList)
+    for j in range(list_length - 1):
+        for i in range(list_length):
+            # first send speed 30 as brake
+            if j == 0:
+                send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, MOVE_BRAKE)
+            # send 90 as neutral speed
+            if j == 1:
+                send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, SPEED_NEUTRAL)
+            # start moving backward, send actual backward speed
+            if j == 2:
+                send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, MOVE_BACKWARD)
+
+
 # Move to side.
 # @direction, 1 - left, 0 - right.
 def turn_vehicle(direction, speed):
     write_log(' vehicle turn : ' + str(direction) + ' speed: ' + str(speed))
+
+    # turning left
     if direction == 1:
+        faster_wheels = [x for x in wheelList if x.wheelNumber == 1 or x.wheelNumber == 3]
+        slower_wheels = [x for x in wheelList if x.wheelNumber == 2 or x.wheelNumber == 4]
+    # turning right
+    else:
+        slower_wheels = [x for x in wheelList if x.wheelNumber == 1 or x.wheelNumber == 3]
+        faster_wheels = [x for x in wheelList if x.wheelNumber == 2 or x.wheelNumber == 4]
+
+    # set speed on faster wheels
+    for i in range(len(faster_wheels)):
+        send_speed_instruction(faster_wheels[i].ipAddress, WHEEL_PORT, faster_wheels[i].wheelNumber, speed)
+    # set speed on slower wheel
+    for j in range(3):
+        for i in range(len(slower_wheels)):
+            # first send speed 30 as brake
+            if j == 0:
+                send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, MOVE_BRAKE)
+            # send 90 as neutral speed
+            if j == 1:
+                send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, SPEED_NEUTRAL)
+            # start moving backward, send actual backward speed
+            if j == 2:
+                send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, 180 - speed)
+
+    '''if direction == 1:
+        # move two vehicles forward
         send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, speed)
         send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, speed)
         send_speed_instruction(wheelList[1].ipAddress, WHEEL_PORT, wheelList[1].wheelNumber, 180 - speed)
@@ -263,7 +308,7 @@ def turn_vehicle(direction, speed):
         send_speed_instruction(wheelList[3].ipAddress, WHEEL_PORT, wheelList[3].wheelNumber, speed)
         send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, 180 - speed)
         send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, 180 - speed)
-
+    '''
 
 # Function to process data from infrared camera.
 # @data, data from camera
@@ -297,7 +342,7 @@ def go_left():
 # Go backward function.
 def go_back():
     print("going backward")
-    move_vehicle(MOVE_BACKWARD)
+    move_backward()
 
 
 # Go right function.
