@@ -43,6 +43,8 @@ class IpWheel:
     def __init__(self, ip, wheelNo):
         self.ipAddress = ip
         self.wheelNumber = wheelNo
+        self.wheelSpeed = 90
+        self.turnFlag = 0
         write_log(' New wheel registered: #' + str(wheelNo) + ', ' + ip)
 
 
@@ -242,12 +244,24 @@ def wait_for_ip_address(data):
         wheelList.append(new_wheel)
 
 
-# Move vehicle forward, backwards or stop vehicle.
+# Move vehicle forward.
 # @speed, vehicle speed
 def move_vehicle(speed):
     write_log(' vehicle move: ' + str(speed))
     for i in range(len(wheelList)):
-        send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, speed)
+        current_speed = wheelList[i].wheelSpeed + 10
+        # if current speed is less than minimal forward speed
+        # OR current speed is set to higher value than allowed
+        # OR vehicle was turning
+        # set minimal forward speed
+        if (current_speed < 100) or (current_speed >= 150) or (wheelList[i].turnFlag == 1):
+            current_speed = 100
+        send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, current_speed)
+        # reset turn flag
+        wheelList[i].turnFlag = 0
+        # speed cannot be higher that 150
+        if current_speed < 150:
+            wheelList[i].wheelSpeed = current_speed
 
 
 # Move vehicle backward
@@ -264,7 +278,15 @@ def move_backward():
                 send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, SPEED_NEUTRAL)
             # start moving backward, send actual backward speed
             if j == 2:
-                send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, MOVE_BACKWARD)
+                # if decreased wheel speed is equal 90 or turnFlag has been set, set 80 as current speed
+                # otherwise decrease speed by 10
+                current_speed = {True: 80, False: wheelList[i].wheelSpeed - 10}[
+                    (wheelList[i].wheelSpeed - 10 == 90) or (wheelList[i].turnFlag == 1)]
+                send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, current_speed)
+                wheelList[i].turnFlag = 0
+                # speed cannot be smaller than 30
+                if current_speed > 30:
+                    wheelList[i].wheelSpeed = current_speed
 
 
 # Move to side.
@@ -283,20 +305,41 @@ def turn_vehicle(direction, speed):
 
     # set speed on faster wheels
     for i in range(len(faster_wheels)):
-        send_speed_instruction(faster_wheels[i].ipAddress, WHEEL_PORT, faster_wheels[i].wheelNumber, speed)
+        current_speed = faster_wheels[i].wheelSpeed + 10
+        # if current speed is less than minimal forward speed allowed
+        # set minimal forward speed + 10
+        if current_speed <= 100:
+            current_speed = 110
+        # else if current speed is set to higher value than allowed
+        # set original forward speed
+        elif current_speed >= 150:
+            current_speed -= 10
+        send_speed_instruction(faster_wheels[i].ipAddress, WHEEL_PORT, faster_wheels[i].wheelNumber, current_speed)
     # set speed on slower wheel
-    for j in range(3):
-        for i in range(len(slower_wheels)):
-            # first send speed 30 as brake
-            if j == 0:
-                send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, MOVE_BRAKE)
-            # send 90 as neutral speed
-            if j == 1:
-                send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, SPEED_NEUTRAL)
-            # start moving backward, send actual backward speed
-            if j == 2:
-                send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, 180 - speed)
+    #for j in range(3):
+    for i in range(len(slower_wheels)):
+        '''# first send speed 30 as brake
+        if j == 0:
+            send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, MOVE_BRAKE)
+        # send 90 as neutral speed
+        if j == 1:
+            send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, SPEED_NEUTRAL)
+        # start moving backward, send actual backward speed
 
+        if j == 2:
+        '''
+        # maintaining the balance between faster and slower wheels
+        current_speed = {True: faster_wheels[0].wheelSpeed - 10, False: slower_wheels[i].wheelSpeed - 10}[
+            faster_wheels[0].wheelSpeed <= slower_wheels[i].wheelSpeed - 10]
+        # current_speed = slower_wheels[i].wheelSpeed - 10
+        # if current slower wheel speed is len than minimal forward speed, set to minimal forward speed
+        if current_speed < 100:
+            current_speed = 100
+        send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, current_speed)
+
+    # set turn flag for wheels
+    for i in range(len(wheelList)):
+        wheelList[i].turnFlag = 1
     '''if direction == 1:
         # move two vehicles forward
         send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, speed)
