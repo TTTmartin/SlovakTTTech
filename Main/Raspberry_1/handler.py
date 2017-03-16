@@ -315,12 +315,16 @@ def turn_vehicle(direction, speed):
 def process_infrared_camera(data):
     print(data)
 
+def process_gps(data):
+    DIRECTION = int("".join([data[14], data[15], data[16], data[17]]), 16)
+    log_file.write(str(datetime.datetime.now()) + ' Direction updated to: ' + str(DIRECTION) + '\n')
 
 # Process message type function.
 # @data, data from message
 def process_message(data):
     message_type = data[10:14]
     message_types = {
+        "0006": process_gps,
         "0005": process_laser,
         "0003": process_infrared_camera
     }
@@ -366,7 +370,7 @@ def listen(ip, port):
     laser_message = "010201010100050200C8001E015E005000A005DC00B30037"
     camera_message = "010000000003A5"
     arduino_message = "01000101010000C0A80116"
-    # laser_message = "01020100000502 00CB 001E 015E 0050 00A0 05DC 00B3 0037"
+    gps_message = "01020101010006012a"
     # 2 30 350 80 20 1500 192 55
     # process_message(laser_message)
     #laserList = process_laser(laser_message)
