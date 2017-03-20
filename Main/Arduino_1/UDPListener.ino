@@ -4,9 +4,25 @@
 
 // constants which are unique for every Arduino
 // Arduino number used for identification
-#define ARDUINO_NUMBER 4
+#define ARDUINO_NUMBER 1
+// MAC address of Arduino
+byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xDF };
+/*
+// Arduino number used for identification
+#define ARDUINO_NUMBER 2
+// MAC address of Arduino
+byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0x5A };
+
+// Arduino number used for identification
+#define ARDUINO_NUMBER 3
 // MAC address of Arduino
 byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xD3 };
+
+// Arduino number used for identification
+#define ARDUINO_NUMBER 4
+// MAC address of Arduino
+byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xBF };
+*/
 
 // fixed constants
 // IP address of master Raspberry Pi (RPI)
@@ -48,6 +64,15 @@ void setup() {
 
   // notify RPI about obtained IP address from DHCP
   IPAddress localIp = Ethernet.localIP();
+  for (int i = 0; i < 4; i++) {
+    notifyMessage[i + 7] = localIp[i];
+    Serial.print(localIp[i], DEC);
+    if (i < 3) {
+      Serial.print(".");
+    }
+  }
+  Serial.println(" END");
+  
   Udp.beginPacket(MASTER_RPI_IP, localPort);
   Udp.write(notifyMessage, sizeof(notifyMessage));
   Udp.endPacket();
@@ -81,16 +106,11 @@ void loop() {
     Serial.println(packetBuffer);
 
     // if condition pass instruction with new wheel speed is for this Arduino
-    if ((packetBuffer[0] == '0') && (packetBuffer[1] == '1') && (packetBuffer[2] == '1') && (packetBuffer[3] == '0') && (packetBuffer[4] == char(48 + ARDUINO_NUMBER)) && (packetBuffer[5] == '0') && (packetBuffer[6] == '1')) {
+    if ((packetBuffer[0] == 0) && (packetBuffer[1] == 1) && (packetBuffer[2] == 1) && (packetBuffer[3] == 0) && (packetBuffer[4] == ARDUINO_NUMBER) && (packetBuffer[5] == 0) && (packetBuffer[6] == 1)) {
       Serial.println("Instruction to set motor speed for this Arduino has arrived");
-      String wheelSpeed = "";
-
-      // parse new wheel speed from packet
-      for (int i = 7; i < sizeof(packetBuffer); i++) {
-        wheelSpeed = wheelSpeed + (String) packetBuffer[i];
-      }
       
-      int wheelSpeedInt = wheelSpeed.toInt();
+      // parse new wheel speed from packet
+      int wheelSpeedInt = packetBuffer[7];
       Serial.println(wheelSpeedInt);
 
       // if new wheel speed is valid, it will be set to motor
