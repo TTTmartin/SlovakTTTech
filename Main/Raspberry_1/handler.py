@@ -4,7 +4,7 @@ import threading
 import time
 import socket
 import datetime
-
+import msvcrt
 
 # Constants for UDP packets
 # from distlib.compat import raw_input
@@ -254,7 +254,9 @@ def move_vehicle(speed):
         # OR current speed is set to higher value than allowed
         # OR vehicle was turning
         # set minimal forward speed
-        if (current_speed < 100) or (current_speed >= 150) or (wheelList[i].turnFlag == 1):
+        if current_speed >= 150:
+            current_speed = wheelList[i].wheelSpeed
+        elif (current_speed < 100) or (wheelList[i].turnFlag == 1):
             current_speed = 100
         send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, current_speed)
         # reset turn flag
@@ -278,10 +280,14 @@ def move_backward():
                 send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, SPEED_NEUTRAL)
             # start moving backward, send actual backward speed
             if j == 2:
-                # if decreased wheel speed is equal 90 or turnFlag has been set, set 80 as current speed
-                # otherwise decrease speed by 10
-                current_speed = {True: 80, False: wheelList[i].wheelSpeed - 10}[
-                    (wheelList[i].wheelSpeed - 10 == 90) or (wheelList[i].turnFlag == 1)]
+                # if speed decrease to 30 or less, set minimal backward speed
+                if (wheelList[i].wheelSpeed - 10) <= 30:
+                    current_speed =  40
+                else:
+                    # if decreased wheel speed is equal 90 or turnFlag has been set, set 80 as current speed
+                    # otherwise decrease speed by 10
+                    current_speed = {True: 80, False: wheelList[i].wheelSpeed - 10}[
+                        (wheelList[i].wheelSpeed - 10 == 90) or (wheelList[i].turnFlag == 1)]
                 send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, current_speed)
                 wheelList[i].turnFlag = 0
                 # speed cannot be smaller than 30
@@ -398,6 +404,45 @@ def go_right():
     turn_vehicle(0, MOVE_FORWARD)
 
 
+class _Getch:
+    """Gets a single character from standard input.  Does not echo to the
+screen."""
+    def __init__(self):
+        try:
+            self.impl = _GetchWindows()
+        except ImportError:
+            print("error")
+            #self.impl = _GetchUnix()
+
+    def __call__(self): return self.impl()
+
+
+'''class _GetchUnix:
+    def __init__(self):
+        import tty, sys
+
+    def __call__(self):
+        import sys, tty, termios
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
+'''
+
+class _GetchWindows:
+    def __init__(self):
+        import msvcrt
+
+    def __call__(self):
+        import msvcrt
+        return msvcrt.getch()
+
+
+
 # Function to listen on ip and port.
 def listen(ip, port):
     global wheelList
@@ -424,16 +469,8 @@ def listen(ip, port):
     except socket.error:
         log_file.write(str(datetime.datetime.now()) + ' port already bind \n')
 
+
     while True:
-        # read user input
-        letter = input("direction: ");
-        direction_types = {
-            "w": go_straight,
-            "a": go_left,
-            "s": go_back,
-            "d": go_right
-        }
-        direction_types[letter]();
         # data, addr = sock.recvfrom(1024)
         # write_log('receive message: ' + str(data.decode()))
 
@@ -442,22 +479,35 @@ def listen(ip, port):
         # print(pom[0].ipAddress)
         # send_packet(pom[0].ipAddress, 8000, pom[0].wheelNumber)
 
-        # if not all IP address received
+        #if not all IP address received
         '''if len(wheelList) < 4:
             wait_for_ip_address(str(data.decode()))
             if len(wheelList) == 4:
                 # sort list according to wheelNumber
                 wheelList.sort(key=lambda x: x.wheelNumber)
-        if len(wheelList) == 4:
-            for wheel in wheelList:
-                move_vehicle(MOVE_FORWARD)
-                turn_vehicle(1, MOVE_FORWARD)
-    #   TODO: posielanie rychlosti arduinu
         '''
+        if len(wheelList) == 4:
+            # read user input
+            getch = _Getch()
+            # FUNGUJE LEN PRE PRIKAZOVY RIADOK NIE KONZOLU!!!!!
+            print("direction: ")
+            letter = getch()
+            # letter = input("direction: ")
+            direction_types = {
+                "w": go_straight,
+                "a": go_left,
+                "s": go_back,
+                "d": go_right
+            }
+            # decode, because standard input put 'b' befor char
+            direction_types[letter.decode()]();
+
+    #   TODO: posielanie rychlosti arduinu
+
 
 log_file = open('control_unit_log', 'w+')
 # UDP_IP = "192.168.1.200"
-UDP_IP = "147.175.152.40"
+UDP_IP = "147.175.182.7"
 UDP_PORT = 5000
 
 write_log(' control unit start')
