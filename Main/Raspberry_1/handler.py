@@ -39,6 +39,10 @@ INDEX_OF_PACKET_BYTE = 0
 
 
 # Model for saving information about wheel IP address and number
+# ipAddress, ip address of wheel
+# wheelNumber, number of wheel
+# wheelSpeed, current wheel speed
+# turnFlag, indicator of turning
 class IpWheel:
     def __init__(self, ip, wheelNo):
         self.ipAddress = ip
@@ -59,8 +63,8 @@ class LaserData:
         self.endComputedAngle = {True: abs(endAngle - DIRECTION), False: abs(360 - endAngle + DIRECTION)}[self.endAngle <= DIRECTION + 180]
         self.directionAngle = {True: self.startAngle, False: self.endAngle}[self.startComputedAngle <= self.endComputedAngle]
         write_log(' New laser data: startAngle: ' + str(startAngle) + ' startDistance: ' + str(startDistance) + ' endAngle: ' + str(endAngle) + ' endDistance: ' + str(endDistance))
-        print("STARTCOMPUTED: " + str(self.startComputedAngle))
-        print("ENDCOMPUTED: " + str(self.endComputedAngle))
+        print("Start computed: " + str(self.startComputedAngle))
+        print("End computed: " + str(self.endComputedAngle))
 
 
 # Initializing UDP communication.
@@ -79,9 +83,6 @@ class UdpListener(threading.Thread):
 
 # Function for processing laser packet.
 def process_laser(laser_message):
-    # laser_message = "010201010100050200C8001E015E005000A005DC00B30037"
-    # count of records
-    # convert 2 bytes to int representation of their hex value
     number_of_records = int(
         "".join([laser_message[INDEX_OF_PACKET_BYTE + 14], laser_message[INDEX_OF_PACKET_BYTE + 15]]), 16)
     print("count of lase data: ", number_of_records)
@@ -161,24 +162,6 @@ def find_closest_degree(direction, laser_data_list):
             turn_vehicle(1, MOVE_FORWARD)
         else:
             turn_vehicle(0, MOVE_FORWARD)
-    '''
-    x = direction
-    while range_list[x] != 1:
-        right += 1
-        x = (x + 1) % 360
-
-    x = direction
-    while range_list[x] != 1:
-        left += 1
-        x = (x - 1) % 360
-
-    if (right < left):
-        return [(direction + right) % 360, (direction - left) % 360]
-    elif (left < right):
-        return [(direction - left) % 360, (direction + right) % 360]
-    else:
-        return [(direction + right) % 360, (direction - left) % 360]
-    '''
 
 
 # Process laser data.
@@ -381,6 +364,7 @@ def go_right():
     turn_vehicle(0, MOVE_FORWARD)
 
 
+# Stop vehicle function.
 def stop():
     print("stopping");
     for j in range(2):
@@ -392,10 +376,10 @@ def stop():
             if j == 1:
                 send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, SPEED_NEUTRAL)
 
+            wheelList[i].wheelSpeed = 90;
+
 
 class _Getch:
-    """Gets a single character from standard input.  Does not echo to the
-screen."""
     def __init__(self):
         try:
             self.impl = _GetchWindows()
@@ -421,6 +405,7 @@ screen."""
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
 '''
+
 
 class _GetchWindows:
     def __init__(self):
@@ -477,8 +462,8 @@ def listen(ip, port):
         if len(wheelList) == 4:
             # read user input
             getch = _Getch()
-            # FUNGUJE LEN PRE PRIKAZOVY RIADOK NIE KONZOLU!!!!!
-            print("direction: ")
+            # FUNGUJE LEN PRE CMD!!!!!
+            print("direction: w - forward, a - turn left, d - turn right, s - backward, q - stop")
             letter = getch()
             # letter = input("direction: ")
             direction_types = {
@@ -490,8 +475,6 @@ def listen(ip, port):
             }
             # decode, because standard input put 'b' befor char
             direction_types[letter.decode()]();
-
-    #   TODO: posielanie rychlosti arduinu
 
 
 log_file = open('control_unit_log', 'w+')
