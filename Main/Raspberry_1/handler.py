@@ -221,10 +221,9 @@ def send_speed_instruction(ip, port, wheel_number, speed):
     # 00 - destination board is arduino
     # wheel_number - # of destination board
     # 0001 - type of message is instruction
-    # data = "".join(["0110", str(wheel_number), "01", str(speed)])
-    data = "".join(["00010100", "0" + str(wheel_number), "0001", str(format(speed, 'x'))])
+    data = bytearray([0, 1, 1, 0, wheel_number, 0, 1, speed])
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.sendto(data.encode(), (ip, WHEEL_PORT))
+    sock.sendto(data, (ip, WHEEL_PORT))
 
 
 # Function to save received IP address of device.
@@ -324,16 +323,6 @@ def turn_vehicle(direction, speed):
     # set speed on slower wheel
     # for j in range(3):
     for i in range(len(slower_wheels)):
-        '''# first send speed 30 as brake
-        if j == 0:
-            send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, MOVE_BRAKE)
-        # send 90 as neutral speed
-        if j == 1:
-            send_speed_instruction(slower_wheels[i].ipAddress, WHEEL_PORT, slower_wheels[i].wheelNumber, SPEED_NEUTRAL)
-        # start moving backward, send actual backward speed
-
-        if j == 2:
-        '''
         current_speed = {True: faster_wheels[0].wheelSpeed - 10, False: slower_wheels[i].wheelSpeed - 10}[
             faster_wheels[0].wheelSpeed <= slower_wheels[i].wheelSpeed - 10]
         # current_speed = slower_wheels[i].wheelSpeed - 10
@@ -345,18 +334,6 @@ def turn_vehicle(direction, speed):
     # set turn flag for wheels
     for i in range(len(wheelList)):
         wheelList[i].turnFlag = 1
-    '''if direction == 1:
-        # move two vehicles forward
-        send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, speed)
-        send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, speed)
-        send_speed_instruction(wheelList[1].ipAddress, WHEEL_PORT, wheelList[1].wheelNumber, 180 - speed)
-        send_speed_instruction(wheelList[3].ipAddress, WHEEL_PORT, wheelList[3].wheelNumber, 180 - speed)
-    else:
-        send_speed_instruction(wheelList[1].ipAddress, WHEEL_PORT, wheelList[1].wheelNumber, speed)
-        send_speed_instruction(wheelList[3].ipAddress, WHEEL_PORT, wheelList[3].wheelNumber, speed)
-        send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, 180 - speed)
-        send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, 180 - speed)
-    '''
 
 
 # Function to process data from infrared camera.
@@ -404,6 +381,18 @@ def go_right():
     turn_vehicle(0, MOVE_FORWARD)
 
 
+def stop():
+    print("stopping");
+    for j in range(2):
+        for i in range(len(wheelList)):
+            # first send speed 30 as brake
+            if j == 0:
+                send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, MOVE_BRAKE)
+            # send 90 as neutral speed
+            if j == 1:
+                send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, SPEED_NEUTRAL)
+
+
 class _Getch:
     """Gets a single character from standard input.  Does not echo to the
 screen."""
@@ -440,7 +429,6 @@ class _GetchWindows:
     def __call__(self):
         import msvcrt
         return msvcrt.getch()
-
 
 
 # Function to listen on ip and port.
@@ -497,7 +485,8 @@ def listen(ip, port):
                 "w": go_straight,
                 "a": go_left,
                 "s": go_back,
-                "d": go_right
+                "d": go_right,
+                "q": stop
             }
             # decode, because standard input put 'b' befor char
             direction_types[letter.decode()]();
@@ -506,8 +495,8 @@ def listen(ip, port):
 
 
 log_file = open('control_unit_log', 'w+')
-# UDP_IP = "192.168.1.200"
-UDP_IP = "147.175.182.7"
+UDP_IP = "192.168.1.200"
+#UDP_IP = "147.175.182.7"
 UDP_PORT = 5000
 
 write_log(' control unit start')
