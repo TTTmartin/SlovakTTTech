@@ -1,25 +1,68 @@
+#include <SPI.h>
 #include <Wire.h>
 #include <SoftwareSerial.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_HMC5883_U.h>
+#include <Ethernet2.h>
 
+// GPS accuracy for reaching desired map point
 #define ACCURACY 0.00004
-#define MAP_LENGTH 5
+
+// Number of map points
+#define MAP_LENGTH 29
+
+// Arduino number used for identification
+#define ARDUINO_NUMBER 5
+
+// MAC address of Arduino
+byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xAB, 0xCD };
+
+// IP address of master Raspberry Pi (RPI)
+#define MASTER_RPI_IP "192.168.1.200"
+
+// port used for communication between Arduino and RPI
+const unsigned int localPort = 5000;
+// message sent for RPI when Arduino obtains new GPS and compass data and calculates relative angle (last two zeros will be changed)
+byte notifyMessage[] = {1, 0, ARDUINO_NUMBER, 1, 1, 0, 6, 0, 0};
 
 // map node structure
 struct nav_point{  
-  long double latitude;
-  long double longitude;
+  float latitude;
+  float longitude;
 };
 
 // Routing points
-nav_point nav_map [5] = 
+nav_point nav_map [MAP_LENGTH] = 
 {
-  {48.386545, 20.017811},
-  {48.386345, 20.018058},
-  {48.386607, 20.018291},
-  {48.386748, 20.018017},
-  {48.386887, 20.018130},
+  {48.153818, 17.071139},
+  {48.153770, 17.071133},
+  {48.153708, 17.071127},
+  {48.153647, 17.071123},
+  {48.153591, 17.071139},
+  {48.153526, 17.071138},
+  {48.153446, 17.071131},
+  {48.153390, 17.071136}, 
+  {48.153356, 17.071175}, //zatacka
+  {48.153337, 17.071242},
+  {48.153333, 17.071314},
+  {48.153329, 17.071431},
+  {48.153327, 17.071520},
+  {48.153323, 17.071625},
+  {48.153327, 17.071707},
+  {48.153303, 17.071755}, //zatacka
+  {48.153247, 17.071780},
+  {48.153184, 17.071804},
+  {48.153151, 17.071852},
+  {48.153110, 17.071903},
+  {48.153060, 17.071918},
+  {48.153006, 17.071913},
+  {48.152942, 17.071909},
+  {48.152882, 17.071902},
+  {48.152808, 17.071898},
+  {48.152757, 17.071932},
+  {48.152746, 17.072027},
+  {48.152744, 17.072122},
+  {48.152740, 17.072197}
 };
 
 // Assign a unique ID to this sensor at the same time
@@ -33,6 +76,7 @@ SoftwareSerial GPS(2,3);
 // $GPGGA,053740.000,2503.6319,N,12136.0099,E,1,08,1.1,63.8,M,15.2,M,,0000*64
 char messageTypeDesired[] = {'G', 'P', 'G', 'G', 'A'};
 char msgChar;
+EthernetUDP Udp;
 int node_number = 0;
 bool wasVehicleLocated = false;
 
@@ -42,6 +86,14 @@ void setup()
 {
   GPS.begin(9600);
   Serial.begin(9600);
+
+  // waiting for IP address from DHCP on RPI
+  if (Ethernet.begin(mac) == 0) {
+    Serial.println("Failed to configure Ethernet using DHCP");
+    for(;;);
+  }
+    
+  Udp.begin(localPort);
 
   // Initialise the sensor
   if(!mag.begin()) {
@@ -135,7 +187,7 @@ void loop()
           Serial.println("There is no satellite connection");
           Serial.print("Car heading: "); 
           Serial.print(headingDegrees);
-          Serial.println(" degrees");
+          Serial.println(" degrees");         
         } else {
           // Parse string to float
           // Arduino stores float proprerly but Serial.println can print it only with two decimal precision
@@ -147,9 +199,9 @@ void loop()
           float lon = lonD + lonM; 
 
           Serial.print("Latitude: ");
-          Serial.println(lat);
+          Serial.println(lat, 10);
           Serial.print("Longitude: ");
-          Serial.println(lon);
+          Serial.println(lon, 10);
           Serial.print("Car heading: "); 
           Serial.print(headingDegrees);
           Serial.println(" degrees");
@@ -158,7 +210,7 @@ void loop()
           actual.longitude = lon;
           actual.latitude = lat;
 
-      // Gets node number after car starts to receive GPS signal
+          // Gets node number after car starts to receive GPS signal
           if (!wasVehicleLocated) {
             node_number = find_closest_point(actual);
           }
@@ -168,13 +220,26 @@ void loop()
           if(is_in_node(actual ,nav_map[node_number])){ 
             node_number++;
           }
-          
+      
           int relative_degree = int(calculate_relative_degree(headingDegrees, calculate_compass_degree(actual, nav_map[node_number])));
-          Serial.print("Nasledujuci je bod s indexom: ");
+          Serial.print("Next point index: ");
           Serial.println(node_number);
-          Serial.print("Uhol odklonu od nasledujuceho bodu: ");
+          Serial.print("Relative angle to next point: ");
           Serial.print(relative_degree);
-          Serial.println(" stupnov");     
+          Serial.println(" degrees");
+
+          // send notify message to RPI
+          if (relative_degree > 255) {
+            notifyMessage[7] = 1;
+            notifyMessage[8] = (relative_degree - 256); 
+          } else {
+            notifyMessage[7] = 0;
+            notifyMessage[8] = relative_degree;
+          }
+
+          Udp.beginPacket(MASTER_RPI_IP, localPort);
+          Udp.write(notifyMessage, sizeof(notifyMessage));
+          Udp.endPacket();
         }
       } else {
         // This is not my desired message so iterate to next message
@@ -213,7 +278,7 @@ int find_closest_point(nav_point actual)
 // @y, difference between y-axis values of start and end node
 // @degree, degree calculated for first quadrant
 int degree_based_on_quadrant(float x, float y, float degree)
-{
+{  
   if(x>=0 && y>=0)
   {
     return 90 - degree;
@@ -249,9 +314,19 @@ float calculate_relative_degree(float compass, float directionValue)
 // @end, end node
 float calculate_compass_degree(nav_point start,nav_point endPoint)
 {
-  double x = endPoint.latitude-start.latitude;
-  double y = endPoint.longitude-start.longitude;
-  return degree_based_on_quadrant(x,y,atan(abs(x)/abs(y)) * (180/PI));
+  float x = endPoint.latitude-start.latitude;
+  float y = endPoint.longitude-start.longitude;
+
+  if (y == 0) {
+    return degree_based_on_quadrant(x, y, (1.570796 * (180/PI)));
+  } else {
+    double atanVar = x/y;
+
+    if(atanVar < 0) {
+      atanVar = atanVar * -1;
+    }    
+    return degree_based_on_quadrant(x, y, (atan(atanVar) * (180/PI)));  
+  }
 }
 
 
