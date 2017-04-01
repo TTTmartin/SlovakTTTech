@@ -2,27 +2,33 @@
 #include <Servo.h>
 #include <Ethernet2.h>
 
+
+// Arduino number (choices are ARDUINO_1, ARDUINO_2, ARDUINO_3, ARDUINO_4)
+#define ARDUINO_1
+
+
 // constants which are unique for every Arduino
-// Arduino number used for identification
-#define ARDUINO_NUMBER 1
-// MAC address of Arduino
-byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xDF };
-/*
-// Arduino number used for identification
-#define ARDUINO_NUMBER 2
-// MAC address of Arduino
-byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0x5A };
+#ifdef ARDUINO_1
+  // Arduino number used for identification
+  #define ARDUINO_NUMBER 1
+  // MAC address of Arduino
+  byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xDF };
+#endif
 
-// Arduino number used for identification
-#define ARDUINO_NUMBER 3
-// MAC address of Arduino
-byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xD3 };
+#ifdef ARDUINO_2
+  #define ARDUINO_NUMBER 2
+  byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0x5A };
+#endif
 
-// Arduino number used for identification
-#define ARDUINO_NUMBER 4
-// MAC address of Arduino
-byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xBF };
-*/
+#ifdef ARDUINO_3
+  #define ARDUINO_NUMBER 3
+  byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xD3 };
+#endif
+
+#ifdef ARDUINO_4
+  #define ARDUINO_NUMBER 4
+  byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0xCF, 0xBF };
+#endif
 
 // fixed constants
 // IP address of master Raspberry Pi (RPI)
@@ -110,7 +116,7 @@ void loop() {
       Serial.println("Instruction to set motor speed for this Arduino has arrived");
       
       // parse new wheel speed from packet
-      int wheelSpeedInt = packetBuffer[7];
+      int wheelSpeedInt = (unsigned byte) packetBuffer[7];
       Serial.println(wheelSpeedInt);
 
       // if new wheel speed is valid, it will be set to motor
