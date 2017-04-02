@@ -32,10 +32,10 @@ MOVE_BACKWARD = 50
 
 # Constants for laser processing.
 MIN_DISTANCE = 50
-DIRECTION = 0
+DIRECTION = 5
 ANGLE_CONSTANT = 10
-# 0-left, 1-right, 2-straight
-LASER_RESULT = 2
+# 0-left, 1-right, 2-straight, 3-stop
+LASER_RESULT = 1
 
 # Constants for camera processing.
 CAMERA_ANGLE = 0
@@ -129,18 +129,77 @@ def parse_laser_data(laser_message):
 
 # Finds closest clear degrees to direction degree
 # returns 2 fields with degree, first is the closer one
-# @direction, main degree
 # @laser_data_list, list of laser data
-def find_closest_degree(direction, laser_data_list):
-    left = 0
-    right = 0
-
+def find_closest_degree(laser_data_list):
     laser_data_list.sort(key=lambda x: x.startComputedAngle)
     startAngle = laser_data_list[0]
     laser_data_list.sort(key=lambda x: x.endComputedAngle)
     endAngle = laser_data_list[0]
 
-    move_forward_right_flag = 0
+    global LASER_RESULT
+    is_direction_set = False
+    # 0-left, 1-right, 2-straight, 3-stop
+    # if direction is between <350,10>
+    if 350 < DIRECTION or DIRECTION < 10:
+        print("1")
+        for data in laser_data_list:
+            # if we can go straight in range cca <350,10>
+            if (data.startAngle > data.endAngle) and (data.startAngle >= 0) and (0 <= data.endAngle):
+                print("2")
+                LASER_RESULT = 2
+                is_direction_set = True
+                break
+        if is_direction_set == False:
+                print("3")
+                closestAngle = {True: startAngle, False: endAngle}[startAngle.startComputedAngle <= endAngle.endComputedAngle]
+                # if closest angle is higher or equal than 180 - means left is closer
+                if closestAngle.directionAngle >= 180:
+                    print("4")
+                    LASER_RESULT = 0
+                    is_direction_set = True
+                # if closest angle is lower than 180 - means right is closer
+                else:
+                    print("5")
+                    LASER_RESULT = 1
+                    is_direction_set = True
+
+    if is_direction_set:
+        return
+
+    for data in laser_data_list:
+        # if DIRECTION not straight, direction is free, turn to direction
+        if ((data.startAngle > data.endAngle) and ((data.startAngle >= DIRECTION) and (DIRECTION <= data.endAngle))) or ((data.startAngle < data.endAngle) and ((data.startAngle <= DIRECTION) and (DIRECTION <= data.endAngle))):
+            print("6")
+            # if DIRECTION is higher or equal than 180 - means left is closer
+            if DIRECTION >= 180:
+                print("7")
+                LASER_RESULT = 0
+                is_direction_set = True
+                break
+            # if DIRECTION is lower than 180 - means right is closer
+            else:
+                print("8")
+                LASER_RESULT = 1
+                is_direction_set = True
+                break
+
+    if is_direction_set:
+        return
+
+    closestAngle = {True: startAngle, False: endAngle}[startAngle.startComputedAngle <= endAngle.endComputedAngle]
+    # if closest angle is higher or equal than 180 - means left is closer
+    if closestAngle.directionAngle >= 180:
+        print("9")
+        LASER_RESULT = 0
+        print("abc: ", LASER_RESULT)
+        is_direction_set = True
+    # if closest angle is lower than 180 - means right is closer
+    else:
+        print("10")
+        LASER_RESULT = 1
+        is_direction_set = True
+
+    '''move_forward_right_flag = 0
     move_forward_left_flag = 0
     move_forward_flag = 0
     for data in laser_data_list:
@@ -162,13 +221,14 @@ def find_closest_degree(direction, laser_data_list):
         turn_vehicle(0, MOVE_FORWARD)
     # find closest angle
     else:
-        closestAngle = {True: startAngle, False: endAngle}[startAngle.startComputedAngle <= endAngle.endComputedAngle]
-        print("Win: " + str(closestAngle.directionAngle))
-        if closestAngle.directionAngle >= 180:
-            turn_vehicle(1, MOVE_FORWARD)
-        else:
-            turn_vehicle(0, MOVE_FORWARD)
 
+    closestAngle = {True: startAngle, False: endAngle}[startAngle.startComputedAngle <= endAngle.endComputedAngle]
+    print("Win: " + str(closestAngle.directionAngle))
+    if closestAngle.directionAngle >= 180:
+        turn_vehicle(1, MOVE_FORWARD)
+    else:
+        turn_vehicle(0, MOVE_FORWARD)
+'''
 
 # Process laser data.
 # @laser_data, free angles.
@@ -176,9 +236,15 @@ def process_laser_data(laser_data):
     # get list of angles
     list_of_angles = parse_laser_data(laser_data)
     # get best free angle
-    # TODO: ???
-    free_angle = find_closest_degree(0, list_of_angles)[0]
 
+    global LASER_RESULT
+    # TODO: ???
+    if len(list_of_angles) == 0:
+        # stop
+        LASER_RESULT = 3
+    else:
+        find_closest_degree(list_of_angles)
+    print("laser: ", LASER_RESULT)
     # stop vehicle before turning
     stop()
 
@@ -344,15 +410,18 @@ def process_gps(data):
     log_file.write(str(datetime.datetime.now()) + ' Direction updated to: ' + str(DIRECTION) + '\n')
 
 
+# Main vehicle control
 def decision_maker():
-    print("ss")
+    print("LASER RESULT: ", LASER_RESULT)
     # 0-left, 1-right, 2-straight
     # LASER_RESULT - from laser, HIGHEST PRIORITY
     # DIRECTION - from gps and compas
     # CAMERA_ANGLE - from camera LOWEST PRIORITY
 
+    if LASER_RESULT == 3:
+        stop()
     # if laser result is left, turn left.
-    if LASER_RESULT == 0:
+    elif LASER_RESULT == 0:
         turn_vehicle(1, MOVE_FORWARD)
     # if laser result is right, turn right.
     elif LASER_RESULT == 1:
@@ -367,6 +436,7 @@ def decision_maker():
     else:
         move_vehicle(MOVE_FORWARD)
 
+
 # Process message type function.
 # @data, data from message
 def process_message(data):
@@ -378,6 +448,7 @@ def process_message(data):
     }
     message_types[message_type](data)
     decision_maker()
+
 
 # Go straight function.
 def go_straight():
@@ -467,9 +538,10 @@ def listen(ip, port):
     wheelList.append(IpWheel('192.168.1.22', 1))
     wheelList.sort(key=lambda x: x.wheelNumber)
     # move_vehicle(MOVE_FORWARD)
-    laser_message = "01020101010005020154001E001E005000A005DC00B30037"
+    laser_message = "0102010101000502012C001E0154005000A005DC00B70037"
     #  laser_message = "01020101010005020154001E001E005000A005DC00B30037"
     process_laser_data(laser_message)
+    decision_maker()
     camera_message = "010000000003A5"
     arduino_message = "01000101010000C0A80116"
     gps_message = "01020101010006012a"
