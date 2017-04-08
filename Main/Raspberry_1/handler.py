@@ -36,6 +36,7 @@ ANGLE_CONSTANT = 10
 # 0-left, 1-right, 2-straight, 3-stop
 LASER_RESULT = 1
 
+
 # Constants for camera processing.
 CAMERA_ANGLE = 0
 
@@ -81,7 +82,6 @@ class _Getch:
             self.impl = _GetchUnix()
         except ImportError:
             print("error")
-            # self.impl = _GetchUnix()
 
     def __call__(self):
         return self.impl()
@@ -117,7 +117,8 @@ class UdpListener(threading.Thread):
         listen(self.ip, self.port)
 
 
-class wasdThread(threading.Thread):
+# Thread class for WASD control.
+class WasdThread(threading.Thread):
     # Constructor
     def __init__(self):
         threading.Thread.__init__(self)
@@ -134,18 +135,18 @@ class wasdThread(threading.Thread):
             letter = getch()
             if letter == "x":
                 print("break")
-                break;
+                break
 
             if letter == "h":
                 udpListenerThread.sleep(2)
-                break;
+                break
 
             # letter = input("direction: ")
             direction_types = {
-                "w": go_straight,
-                "a": go_left,
-                "s": go_back,
-                "d": go_right,
+                "w": go_straight_wasd,
+                "a": go_left_wasd,
+                "s": go_back_wasd,
+                "d": go_right_wasd,
                 "q": stop
             }
             direction_types[letter.decode()]();
@@ -154,6 +155,7 @@ class wasdThread(threading.Thread):
                 direction_types[letter.decode()]();
             else:
                 print("waiting for wheels")'''
+
 
 # Function for processing laser packet.
 def parse_laser_data(laser_message):
@@ -166,7 +168,6 @@ def parse_laser_data(laser_message):
     count = 0
     # iterating over numbers of road side data from camera, message[6] represents count of numbers
     for index in range(0, number_of_records):
-        # TODO: save to structure
         # get specific entry
         start_angle = int("".join(
             [laser_message[INDEX_OF_PACKET_BYTE + 16 + count], laser_message[INDEX_OF_PACKET_BYTE + 16 + count + 1],
@@ -267,36 +268,6 @@ def find_closest_degree(laser_data_list):
         LASER_RESULT = 1
         is_direction_set = True
 
-    '''move_forward_right_flag = 0
-    move_forward_left_flag = 0
-    move_forward_flag = 0
-    for data in laser_data_list:
-        if data.startAngle < DIRECTION < data.endAngle:
-            move_forward_flag = 1
-        if data.startAngle < (DIRECTION + ANGLE_CONSTANT) % 360 < data.endAngle:
-            move_forward_right_flag = 1
-        if data.startAngle < (DIRECTION - ANGLE_CONSTANT) % 360 < data.endAngle:
-            move_forward_left_flag = 1
-
-    # direction clean and also with angle constants
-    if move_forward_flag and move_forward_left_flag and move_forward_right_flag:
-        move_vehicle(MOVE_FORWARD)
-    # direction clean, right stop
-    elif move_forward_flag and move_forward_right_flag == 0:
-        turn_vehicle(1, MOVE_FORWARD)
-    # direction clean, left stop
-    elif move_forward_flag and move_forward_left_flag == 0:
-        turn_vehicle(0, MOVE_FORWARD)
-    # find closest angle
-    else:
-
-    closestAngle = {True: startAngle, False: endAngle}[startAngle.startComputedAngle <= endAngle.endComputedAngle]
-    print("Win: " + str(closestAngle.directionAngle))
-    if closestAngle.directionAngle >= 180:
-        turn_vehicle(1, MOVE_FORWARD)
-    else:
-        turn_vehicle(0, MOVE_FORWARD)
-'''
 
 # Process laser data.
 # @laser_data, free angles.
@@ -306,7 +277,6 @@ def process_laser_data(laser_data):
     # get best free angle
 
     global LASER_RESULT
-    # TODO: ???
     if len(list_of_angles) == 0:
         # stop
         LASER_RESULT = 3
@@ -315,17 +285,6 @@ def process_laser_data(laser_data):
     print("laser: ", LASER_RESULT)
     # stop vehicle before turning
     stop()
-
-    # move left
-    '''if free_angle >= 180:
-        turn_vehicle(1, MOVE_FORWARD)
-    # move straight ahead
-    elif free_angle == 0:
-        move_vehicle(MOVE_FORWARD)
-    # move right
-    else:
-        turn_vehicle(0, MOVE_FORWARD)
-    return 1;'''
 
 
 # Function for logging.
@@ -364,9 +323,9 @@ def wait_for_ip_address(data):
         for i in range(4):
             number = str(int("".join([data[14+2*i], data[15+2*i]]), 16))
             if i != 3:
-                wheel_ip = wheel_ip + number + '.';
+                wheel_ip = wheel_ip + number + '.'
             else:
-                wheel_ip = wheel_ip + number;
+                wheel_ip = wheel_ip + number
         new_wheel = IpWheel(wheel_ip, wheel_number)
         wheelList.append(new_wheel)
 
@@ -376,15 +335,15 @@ def wait_for_ip_address(data):
 def move_vehicle(speed):
     write_log(' vehicle move: ' + str(speed))
     for i in range(len(wheelList)):
-        current_speed = wheelList[i].wheelSpeed + 2
+        current_speed = wheelList[i].wheelSpeed + 1
         # if current speed is less than minimal forward speed
         # OR current speed is set to higher value than allowed
         # OR vehicle was turning
         # set minimal forward speed
         if current_speed >= 150:
             current_speed = wheelList[i].wheelSpeed
-        elif (current_speed < 100) or (wheelList[i].turnFlag == 1):
-            current_speed = 100
+        elif wheelList[i].turnFlag == 1:
+            current_speed = 91
         send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, current_speed)
         # reset turn flag
         wheelList[i].turnFlag = 0
@@ -397,17 +356,43 @@ def move_vehicle(speed):
 def move_backward():
     write_log(' vehicle move backward: ')
     list_length = len(wheelList)
-    if wheelList[0].wheelSpeed > 90:
+    wheel_speed = wheelList[0].wheelSpeed
+    # if speed is higher than 90, we can decrease it by 1 and send speed to wheels.
+    if wheel_speed - 1 > 90:
         for i in range(list_length):
-            current_speed = {True: 80, False: wheelList[i].wheelSpeed - 2}[
-                (wheelList[i].wheelSpeed - 2 == 90) or (wheelList[i].turnFlag == 1)]
+            #current_speed = {True: 80, False: wheelList[i].wheelSpeed - 1}[
+            #    (wheelList[i].wheelSpeed - 1 == 90) or (wheelList[i].turnFlag == 1)]
+            current_speed = {True: 85, False: wheelList[i].wheelSpeed - 1}[(wheelList[i].turnFlag == 1)]
             send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, current_speed)
             wheelList[i].turnFlag = 0
             wheelList[i].wheelSpeed = current_speed
         return
+    # if speed is lower than 90, we can decrease it by 1 and send speed to wheels.
+    elif wheel_speed - 1 < 90:
+        for i in range(list_length):
+            current_speed = {True: 32, False: wheelList[i].wheelSpeed - 1}[
+                (wheelList[i].wheelSpeed - 1 == 31) or (wheelList[i].turnFlag == 1)]
+            send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, current_speed)
+            wheelList[i].turnFlag = 0
+            wheelList[i].wheelSpeed = current_speed
+        return
+    # this is case with neutral and break speeds
+    else:
+        for i in range(list_length):
+            current_speed = 89
+            for k in range(2):
+                if k == 0:
+                    send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, MOVE_BRAKE)
+                # send 90 as neutral speed
+                if k == 1:
+                    send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, SPEED_NEUTRAL)
+            send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, current_speed)
+            wheelList[i].wheelSpeed = current_speed
 
-        # TODO: prechod z 95 - 80:  95 -> 30 -> 90 -> 80
-    for j in range(list_length - 1):
+    # now ked dam -1 it will be 90
+    # TODO: prechod z 95 - 80:  95 -> 30 -> 90 -> 80
+
+    '''for j in range(list_length - 1):
         for i in range(list_length):
             # first send speed 30 as brake
             if wheelList[0].wheelSpeed == 80:
@@ -431,7 +416,7 @@ def move_backward():
                 wheelList[i].turnFlag = 0
                 # speed cannot be smaller than 30
                 if current_speed > 30:
-                    wheelList[i].wheelSpeed = current_speed
+                    wheelList[i].wheelSpeed = current_speed'''
 
 
 # Move to side.
@@ -476,16 +461,53 @@ def turn_vehicle(direction, speed):
         wheelList[i].turnFlag = 1
 
 
+# Move vehicle forward, backwards.
+# @speed, vehicle speed
+def auto_move_vehicle(speed):
+    write_log(' vehicle move: ' + str(speed))
+    for i in range(len(wheelList)):
+        send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, speed)
+
+
+# Turn vehicle automatically.
+# @direction, 1 - left, 0 - right.
+def auto_turn_vehicle(direction, speed):
+    write_log(' vehicle turn : ' + str(direction) + ' speed: ' + str(speed))
+    if direction == 1:
+        send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, speed)
+        send_speed_instruction(wheelList[3].ipAddress, WHEEL_PORT, wheelList[3].wheelNumber, speed)
+        send_speed_instruction(wheelList[1].ipAddress, WHEEL_PORT, wheelList[1].wheelNumber, MOVE_BRAKE)
+        send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, MOVE_BRAKE)
+        send_speed_instruction(wheelList[1].ipAddress, WHEEL_PORT, wheelList[1].wheelNumber, SPEED_NEUTRAL)
+        send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, SPEED_NEUTRAL)
+        send_speed_instruction(wheelList[1].ipAddress, WHEEL_PORT, wheelList[1].wheelNumber, 180 - speed)
+        send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, 180 - speed)
+
+    else:
+        send_speed_instruction(wheelList[1].ipAddress, WHEEL_PORT, wheelList[1].wheelNumber, speed)
+        send_speed_instruction(wheelList[2].ipAddress, WHEEL_PORT, wheelList[2].wheelNumber, speed)
+        send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, MOVE_BRAKE)
+        send_speed_instruction(wheelList[3].ipAddress, WHEEL_PORT, wheelList[3].wheelNumber, MOVE_BRAKE)
+        send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, SPEED_NEUTRAL)
+        send_speed_instruction(wheelList[3].ipAddress, WHEEL_PORT, wheelList[3].wheelNumber, SPEED_NEUTRAL)
+        send_speed_instruction(wheelList[0].ipAddress, WHEEL_PORT, wheelList[0].wheelNumber, 180 - speed)
+        send_speed_instruction(wheelList[3].ipAddress, WHEEL_PORT, wheelList[3].wheelNumber, 180 - speed)
+
+
 # Function to process data from infrared camera.
 # @data, data from camera
 def process_infrared_camera(data):
     # TODO: skontrolovat index
+    global CAMERA_ANGLE
     CAMERA_ANGLE = data[7]
     if CAMERA_ANGLE > 127:
         CAMERA_ANGLE = 128 - CAMERA_ANGLE
 
 
+# Process data from GPS.
+# @data, data from GPS
 def process_gps(data):
+    global DIRECTION
     DIRECTION = int("".join([data[14], data[15], data[16], data[17]]), 16)
     log_file.write(str(datetime.datetime.now()) + ' Direction updated to: ' + str(DIRECTION) + '\n')
 
@@ -502,19 +524,19 @@ def decision_maker():
         stop()
     # if laser result is left, turn left.
     elif LASER_RESULT == 0:
-        turn_vehicle(1, MOVE_FORWARD)
+        auto_turn_vehicle(1, MOVE_FORWARD)
     # if laser result is right, turn right.
     elif LASER_RESULT == 1:
-        turn_vehicle(0, MOVE_FORWARD)
+        auto_turn_vehicle(0, MOVE_FORWARD)
     # if camera angle > 10, turn right.
     elif CAMERA_ANGLE > 10:
-        turn_vehicle(0, MOVE_FORWARD)
+        auto_turn_vehicle(0, MOVE_FORWARD)
     # if camera angle < -10, turn left.
     elif CAMERA_ANGLE < -10:
-        turn_vehicle(1, MOVE_FORWARD)
+        auto_turn_vehicle(1, MOVE_FORWARD)
     # go straight.
     else:
-        move_vehicle(MOVE_FORWARD)
+        auto_move_vehicle(MOVE_FORWARD)
 
 
 # Process message type function.
@@ -530,26 +552,26 @@ def process_message(data):
     decision_maker()
 
 
-# Go straight function.
-def go_straight():
+# WASD go straight function.
+def go_straight_wasd():
     print("going straight forward")
     move_vehicle(MOVE_FORWARD)
 
 
-# Go left function.
-def go_left():
+# WASD go left function.
+def go_left_wasd():
     print("turning left")
     turn_vehicle(1, MOVE_FORWARD)
 
 
-# Go backward function.
-def go_back():
+# WASD go backward function.
+def go_back_wasd():
     print("going backward")
     move_backward()
 
 
-# Go right function.
-def go_right():
+# WASD go right function.
+def go_right_wasd():
     print("going right")
     turn_vehicle(0, MOVE_FORWARD)
 
@@ -573,12 +595,11 @@ def stop():
 def listen(ip, port):
     global wheelList
     global help_array
-    mode = 0
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    #wheelList.append(IpWheel('192.168.1.10', 3))
-    #wheelList.append(IpWheel('192.168.1.9', 4))
-    #wheelList.append(IpWheel('192.168.1.8', 2))
-    #wheelList.append(IpWheel('192.168.1.22', 1))
+    '''wheelList.append(IpWheel('192.168.1.10', 3))
+    wheelList.append(IpWheel('192.168.1.9', 4))
+    wheelList.append(IpWheel('192.168.1.8', 2))
+    wheelList.append(IpWheel('192.168.1.2', 1))'''
     # wheelList.sort(key=lambda x: x.wheelNumber)
     # move_vehicle(MOVE_FORWARD)
     #laser_message = "0102010101000502012C001E0154005000A005DC00B70037"
@@ -593,20 +614,19 @@ def listen(ip, port):
     #laserList = process_laser_data(laser_message)
     #find_closest_degree(0, laserList)
     try:
-        if len(wheelList) != 4:
-            # bind IP and port
-            print("IP: ", ip)
-            print("port: ", port)
+        #if len(wheelList) != 4:
+        # bind IP and port
+        print("IP: ", ip)
+        print("port: ", port)
 
-            sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            sock.bind((ip, port))
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        sock.bind((ip, port))
     except socket.error:
         log_file.write(str(datetime.datetime.now()) + ' port already bind \n')
         print("error")
 
     while True:
         data, addr = sock.recvfrom(1024)
-        print("tututututu")
 
         # if not all IP address received
         if len(wheelList) < 4:
@@ -616,6 +636,8 @@ def listen(ip, port):
                 wheelList.sort(key=lambda x: x.wheelNumber)
                 wasdThread1.start()
 
+        if len(wheelList) == 4:
+           process_message(str(data.encode('hex')))
         '''getch = _Getch()
         if len(wheelList) == 4:
             if mode == 0:
@@ -647,7 +669,7 @@ UDP_PORT = 5000
 
 write_log(' control unit start')
 
-wasdThread1 = wasdThread();
+wasdThread1 = WasdThread();
 udpListenerThread = UdpListener(UDP_IP, UDP_PORT)
 udpListenerThread.start()
 
