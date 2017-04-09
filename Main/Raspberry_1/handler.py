@@ -136,20 +136,20 @@ class WasdThread(threading.Thread):
             if letter == "x":
                 print("break")
                 break
-
-            if letter == "h":
-                udpListenerThread.sleep(2)
-                break
-
-            # letter = input("direction: ")
-            direction_types = {
-                "w": go_straight_wasd,
-                "a": go_left_wasd,
-                "s": go_back_wasd,
-                "d": go_right_wasd,
-                "q": stop
-            }
-            direction_types[letter.decode()]();
+            try:
+                # letter = input("direction: ")
+                direction_types = {
+                    "w": go_straight_wasd,
+                    "a": go_left_wasd,
+                    "s": go_back_wasd,
+                    "d": go_right_wasd,
+                    "q": stop
+                }
+                direction_types[letter.decode()]()
+            # bad input
+            except:
+                write_log(' Bad input: ' + letter)
+                continue
             '''if(len(wheelList) == 4):
                 # decode, because standard input put 'b' befor char
                 direction_types[letter.decode()]();
@@ -210,62 +210,55 @@ def find_closest_degree(laser_data_list):
     # 0-left, 1-right, 2-straight, 3-stop
     # if direction is between <350,10>
     if 350 < DIRECTION or DIRECTION < 10:
-        print("1")
         for data in laser_data_list:
             # if we can go straight in range cca <350,10>
             if (data.startAngle > data.endAngle) and (data.startAngle >= 0) and (0 <= data.endAngle):
-                print("2")
                 LASER_RESULT = 2
                 is_direction_set = True
                 break
         if is_direction_set == False:
-                print("3")
                 closestAngle = {True: startAngle, False: endAngle}[startAngle.startComputedAngle <= endAngle.endComputedAngle]
                 # if closest angle is higher or equal than 180 - means left is closer
                 if closestAngle.directionAngle >= 180:
-                    print("4")
                     LASER_RESULT = 0
                     is_direction_set = True
                 # if closest angle is lower than 180 - means right is closer
                 else:
-                    print("5")
                     LASER_RESULT = 1
                     is_direction_set = True
 
     if is_direction_set:
+        write_log(' LASER_RESULT SET IN FIRST DECISION: ' + LASER_RESULT)
         return
 
     for data in laser_data_list:
         # if DIRECTION not straight, direction is free, turn to direction
         if ((data.startAngle > data.endAngle) and ((data.startAngle >= DIRECTION) and (DIRECTION <= data.endAngle))) or ((data.startAngle < data.endAngle) and ((data.startAngle <= DIRECTION) and (DIRECTION <= data.endAngle))):
-            print("6")
             # if DIRECTION is higher or equal than 180 - means left is closer
             if DIRECTION >= 180:
-                print("7")
                 LASER_RESULT = 0
                 is_direction_set = True
                 break
             # if DIRECTION is lower than 180 - means right is closer
             else:
-                print("8")
                 LASER_RESULT = 1
                 is_direction_set = True
                 break
 
     if is_direction_set:
+        write_log(' LASER_RESULT SET IN SECOND DECISION: ' + LASER_RESULT)
         return
 
     closestAngle = {True: startAngle, False: endAngle}[startAngle.startComputedAngle <= endAngle.endComputedAngle]
     # if closest angle is higher or equal than 180 - means left is closer
     if closestAngle.directionAngle >= 180:
-        print("9")
         LASER_RESULT = 0
-        print("abc: ", LASER_RESULT)
         is_direction_set = True
+        write_log(' LASER_RESULT SET IN THIRD DECISION: ' + LASER_RESULT)
     # if closest angle is lower than 180 - means right is closer
     else:
-        print("10")
         LASER_RESULT = 1
+        write_log(' LASER_RESULT SET IN FOURTH DECISION: ' + LASER_RESULT)
         is_direction_set = True
 
 
@@ -514,28 +507,33 @@ def process_gps(data):
 
 # Main vehicle control
 def decision_maker():
-    print("LASER RESULT: ", LASER_RESULT)
     # 0-left, 1-right, 2-straight
     # LASER_RESULT - from laser, HIGHEST PRIORITY
     # DIRECTION - from gps and compas
     # CAMERA_ANGLE - from camera LOWEST PRIORITY
 
     if LASER_RESULT == 3:
+        write_log(' STOP VEHICLE IN DECISION_MAKER ')
         stop()
     # if laser result is left, turn left.
     elif LASER_RESULT == 0:
+        write_log(' TURN VEHICLE LEFT IN DECISION_MAKER ')
         auto_turn_vehicle(1, MOVE_FORWARD)
     # if laser result is right, turn right.
     elif LASER_RESULT == 1:
+        write_log(' TURN VEHICLE RIGHT IN DECISION_MAKER ')
         auto_turn_vehicle(0, MOVE_FORWARD)
     # if camera angle > 10, turn right.
     elif CAMERA_ANGLE > 10:
+        write_log(' TURN VEHICLE RIGHT(CAMERA) IN DECISION_MAKER ')
         auto_turn_vehicle(0, MOVE_FORWARD)
     # if camera angle < -10, turn left.
     elif CAMERA_ANGLE < -10:
+        write_log(' TURN VEHICLE LEFT(CAMERA) IN DECISION_MAKER ')
         auto_turn_vehicle(1, MOVE_FORWARD)
     # go straight.
     else:
+        write_log(' GO STRAIGHT VEHICLE IN DECISION_MAKER ')
         auto_move_vehicle(MOVE_FORWARD)
 
 
@@ -548,6 +546,7 @@ def process_message(data):
         "0005": process_laser_data,
         "0003": process_infrared_camera
     }
+    write_log(' IN PROCESS MESSAGE RECEIVED MESSAGE: ' + message_type)
     message_types[message_type](data)
     decision_maker()
 
@@ -578,7 +577,7 @@ def go_right_wasd():
 
 # Stop vehicle function.
 def stop():
-    print("stopping");
+    print("stopping")
     for j in range(2):
         for i in range(len(wheelList)):
             # first send speed 30 as brake
@@ -588,7 +587,7 @@ def stop():
             if j == 1:
                 send_speed_instruction(wheelList[i].ipAddress, WHEEL_PORT, wheelList[i].wheelNumber, SPEED_NEUTRAL)
 
-            wheelList[i].wheelSpeed = 90;
+            wheelList[i].wheelSpeed = 90
 
 
 # Function to listen on ip and port.
