@@ -1,0 +1,1738 @@
+S  thetaaa: 0.00 (0) Dist: 00000.00 Q: 0 
+angle = 0davam do 0
+   thetaaa: 0.59 (1) Dist: 00000.00 Q: 0 
+angle = 1davam do 0
+   thetaaa: 1.19 (2) Dist: 00000.00 Q: 0 
+angle = 1
+   thetaaa: 1.78 (3) Dist: 00000.00 Q: 0 
+angle = 2davam do 0
+   thetaaa: 2.38 (4) Dist: 00000.00 Q: 0 
+angle = 2
+   thetaaa: 2.97 (5) Dist: 00000.00 Q: 0 
+angle = 3davam do 0
+   thetaaa: 3.56 (6) Dist: 00000.00 Q: 0 
+angle = 4davam do 0
+   thetaaa: 4.16 (7) Dist: 00000.00 Q: 0 
+angle = 4
+   thetaaa: 4.75 (8) Dist: 00000.00 Q: 0 
+angle = 5davam do 0
+   thetaaa: 5.34 (9) Dist: 00000.00 Q: 0 
+angle = 5
+   thetaaa: 5.94 (10) Dist: 00000.00 Q: 0 
+angle = 6davam do 0
+   thetaaa: 6.53 (11) Dist: 00000.00 Q: 0 
+angle = 7davam do 0
+   thetaaa: 7.12 (12) Dist: 00000.00 Q: 0 
+angle = 7
+   thetaaa: 7.73 (13) Dist: 00000.00 Q: 0 
+angle = 8davam do 0
+   thetaaa: 8.33 (14) Dist: 00000.00 Q: 0 
+angle = 8
+   thetaaa: 8.92 (15) Dist: 00000.00 Q: 0 
+angle = 9davam do 0
+   thetaaa: 9.52 (16) Dist: 00000.00 Q: 0 
+angle = 10davam do 0
+   thetaaa: 10.11 (17) Dist: 00000.00 Q: 0 
+angle = 10
+   thetaaa: 10.70 (18) Dist: 00000.00 Q: 0 
+angle = 11davam do 0
+   thetaaa: 11.30 (19) Dist: 00000.00 Q: 0 
+angle = 11
+   thetaaa: 11.89 (20) Dist: 00000.00 Q: 0 
+angle = 12davam do 0
+   thetaaa: 12.48 (21) Dist: 00000.00 Q: 0 
+angle = 12
+   thetaaa: 13.08 (22) Dist: 00000.00 Q: 0 
+angle = 13davam do 0
+   thetaaa: 13.67 (23) Dist: 00000.00 Q: 0 
+angle = 14davam do 0
+   thetaaa: 14.27 (24) Dist: 00000.00 Q: 0 
+angle = 14
+   thetaaa: 14.88 (25) Dist: 00000.00 Q: 0 
+angle = 15davam do 0
+   thetaaa: 15.47 (26) Dist: 00000.00 Q: 0 
+angle = 15
+   thetaaa: 16.06 (27) Dist: 00000.00 Q: 0 
+angle = 16davam do 0
+   thetaaa: 16.66 (28) Dist: 00000.00 Q: 0 
+angle = 17davam do 0
+   thetaaa: 17.25 (29) Dist: 00000.00 Q: 0 
+angle = 17
+   thetaaa: 17.84 (30) Dist: 00000.00 Q: 0 
+angle = 18davam do 0
+   thetaaa: 18.44 (31) Dist: 00000.00 Q: 0 
+angle = 18
+   thetaaa: 19.03 (32) Dist: 00000.00 Q: 0 
+angle = 19davam do 0
+   thetaaa: 19.62 (33) Dist: 00000.00 Q: 0 
+angle = 20davam do 0
+   thetaaa: 20.22 (34) Dist: 00000.00 Q: 0 
+angle = 20
+   thetaaa: 20.81 (35) Dist: 00000.00 Q: 0 
+angle = 21davam do 0
+   thetaaa: 21.41 (36) Dist: 00000.00 Q: 0 
+angle = 21
+   thetaaa: 22.02 (37) Dist: 00000.00 Q: 0 
+angle = 22davam do 0
+   thetaaa: 22.61 (38) Dist: 00000.00 Q: 0 
+angle = 23davam do 0
+   thetaaa: 23.20 (39) Dist: 00000.00 Q: 0 
+angle = 23
+   thetaaa: 23.80 (40) Dist: 00000.00 Q: 0 
+angle = 24davam do 0
+   thetaaa: 24.39 (41) Dist: 00000.00 Q: 0 
+angle = 24
+   thetaaa: 24.98 (42) Dist: 00000.00 Q: 0 
+angle = 25davam do 0
+   thetaaa: 25.58 (43) Dist: 00000.00 Q: 0 
+angle = 26davam do 0
+   thetaaa: 26.17 (44) Dist: 00000.00 Q: 0 
+angle = 26
+   thetaaa: 26.77 (45) Dist: 00000.00 Q: 0 
+angle = 27davam do 0
+   thetaaa: 27.36 (46) Dist: 00000.00 Q: 0 
+angle = 27
+   thetaaa: 27.95 (47) Dist: 00000.00 Q: 0 
+angle = 28davam do 0
+   thetaaa: 28.55 (48) Dist: 00000.00 Q: 0 
+angle = 29davam do 0
+   thetaaa: 29.16 (49) Dist: 00000.00 Q: 0 
+angle = 29
+   thetaaa: 29.75 (50) Dist: 00000.00 Q: 0 
+angle = 30davam do 0
+   thetaaa: 30.34 (51) Dist: 00000.00 Q: 0 
+angle = 30
+   thetaaa: 30.94 (52) Dist: 00000.00 Q: 0 
+angle = 31davam do 0
+   thetaaa: 31.53 (53) Dist: 00000.00 Q: 0 
+angle = 32davam do 0
+   thetaaa: 32.12 (54) Dist: 00000.00 Q: 0 
+angle = 32
+   thetaaa: 32.72 (55) Dist: 00000.00 Q: 0 
+angle = 33davam do 0
+   thetaaa: 33.31 (56) Dist: 00000.00 Q: 0 
+angle = 33
+   thetaaa: 33.91 (57) Dist: 00000.00 Q: 0 
+angle = 34davam do 0
+   thetaaa: 34.50 (58) Dist: 00000.00 Q: 0 
+angle = 35davam do 0
+   thetaaa: 35.09 (59) Dist: 00000.00 Q: 0 
+angle = 35
+   thetaaa: 35.69 (60) Dist: 00000.00 Q: 0 
+angle = 36davam do 0
+   thetaaa: 36.30 (61) Dist: 00000.00 Q: 0 
+angle = 36
+   thetaaa: 36.89 (62) Dist: 00000.00 Q: 0 
+angle = 37davam do 0
+   thetaaa: 37.48 (63) Dist: 00000.00 Q: 0 
+angle = 37
+   thetaaa: 38.08 (64) Dist: 00000.00 Q: 0 
+angle = 38davam do 0
+   thetaaa: 38.67 (65) Dist: 00000.00 Q: 0 
+angle = 39davam do 0
+   thetaaa: 39.27 (66) Dist: 00000.00 Q: 0 
+angle = 39
+   thetaaa: 39.86 (67) Dist: 00000.00 Q: 0 
+angle = 40davam do 0
+   thetaaa: 40.45 (68) Dist: 00000.00 Q: 0 
+angle = 40
+   thetaaa: 41.05 (69) Dist: 00000.00 Q: 0 
+angle = 41davam do 0
+   thetaaa: 41.64 (70) Dist: 00000.00 Q: 0 
+angle = 42davam do 0
+   thetaaa: 42.23 (71) Dist: 00000.00 Q: 0 
+angle = 42
+   thetaaa: 42.83 (72) Dist: 00000.00 Q: 0 
+angle = 43davam do 0
+   thetaaa: 43.44 (73) Dist: 00000.00 Q: 0 
+angle = 43
+   thetaaa: 44.03 (74) Dist: 00000.00 Q: 0 
+angle = 44davam do 0
+   thetaaa: 44.62 (75) Dist: 00000.00 Q: 0 
+angle = 45davam do 0
+   thetaaa: 45.22 (76) Dist: 00000.00 Q: 0 
+angle = 45
+   thetaaa: 45.81 (77) Dist: 00000.00 Q: 0 
+angle = 46davam do 0
+   thetaaa: 46.41 (78) Dist: 00000.00 Q: 0 
+angle = 46
+   thetaaa: 47.00 (79) Dist: 00000.00 Q: 0 
+angle = 47davam do 0
+   thetaaa: 47.59 (80) Dist: 00000.00 Q: 0 
+angle = 48davam do 0
+   thetaaa: 48.19 (81) Dist: 00000.00 Q: 0 
+angle = 48
+   thetaaa: 48.78 (82) Dist: 00000.00 Q: 0 
+angle = 49davam do 0
+   thetaaa: 49.38 (83) Dist: 00000.00 Q: 0 
+angle = 49
+   thetaaa: 49.97 (84) Dist: 00000.00 Q: 0 
+angle = 50davam do 0
+   thetaaa: 50.58 (85) Dist: 00000.00 Q: 0 
+angle = 51davam do 0
+   thetaaa: 51.17 (86) Dist: 00000.00 Q: 0 
+angle = 51
+   thetaaa: 51.77 (87) Dist: 00000.00 Q: 0 
+angle = 52davam do 0
+   thetaaa: 52.36 (88) Dist: 00000.00 Q: 0 
+angle = 52
+   thetaaa: 52.95 (89) Dist: 00000.00 Q: 0 
+angle = 53davam do 0
+   thetaaa: 53.55 (90) Dist: 00000.00 Q: 0 
+angle = 54davam do 0
+   thetaaa: 54.14 (91) Dist: 00000.00 Q: 0 
+angle = 54
+   thetaaa: 54.73 (92) Dist: 00000.00 Q: 0 
+angle = 55davam do 0
+   thetaaa: 55.33 (93) Dist: 00000.00 Q: 0 
+angle = 55
+   thetaaa: 55.92 (94) Dist: 00000.00 Q: 0 
+angle = 56davam do 0
+   thetaaa: 56.52 (95) Dist: 00000.00 Q: 0 
+angle = 57davam do 0
+   thetaaa: 57.11 (96) Dist: 00000.00 Q: 0 
+angle = 57
+   thetaaa: 57.72 (97) Dist: 00000.00 Q: 0 
+angle = 58davam do 0
+   thetaaa: 58.31 (98) Dist: 00000.00 Q: 0 
+angle = 58
+   thetaaa: 58.91 (99) Dist: 00000.00 Q: 0 
+angle = 59davam do 0
+   thetaaa: 59.50 (100) Dist: 00000.00 Q: 0 
+angle = 60davam do 0
+   thetaaa: 60.09 (101) Dist: 00000.00 Q: 0 
+angle = 60
+   thetaaa: 60.69 (102) Dist: 00000.00 Q: 0 
+angle = 61davam do 0
+   thetaaa: 61.28 (103) Dist: 00000.00 Q: 0 
+angle = 61
+   thetaaa: 61.88 (104) Dist: 00000.00 Q: 0 
+angle = 62davam do 0
+   thetaaa: 62.47 (105) Dist: 00000.00 Q: 0 
+angle = 62
+   thetaaa: 63.06 (106) Dist: 00000.00 Q: 0 
+angle = 63davam do 0
+   thetaaa: 63.66 (107) Dist: 00000.00 Q: 0 
+angle = 64davam do 0
+   thetaaa: 64.25 (108) Dist: 00000.00 Q: 0 
+angle = 64
+   thetaaa: 64.86 (109) Dist: 00000.00 Q: 0 
+angle = 65davam do 0
+   thetaaa: 65.45 (110) Dist: 00000.00 Q: 0 
+angle = 65
+   thetaaa: 66.05 (111) Dist: 00000.00 Q: 0 
+angle = 66davam do 0
+   thetaaa: 66.64 (112) Dist: 00000.00 Q: 0 
+angle = 67davam do 0
+   thetaaa: 67.23 (113) Dist: 00000.00 Q: 0 
+angle = 67
+   thetaaa: 67.83 (114) Dist: 00000.00 Q: 0 
+angle = 68davam do 0
+   thetaaa: 68.42 (115) Dist: 00000.00 Q: 0 
+angle = 68
+   thetaaa: 69.02 (116) Dist: 00000.00 Q: 0 
+angle = 69davam do 0
+   thetaaa: 69.61 (117) Dist: 00000.00 Q: 0 
+angle = 70davam do 0
+   thetaaa: 70.20 (118) Dist: 00000.00 Q: 0 
+angle = 70
+   thetaaa: 70.80 (119) Dist: 00000.00 Q: 0 
+angle = 71davam do 0
+   thetaaa: 71.39 (120) Dist: 00000.00 Q: 0 
+angle = 71
+   thetaaa: 72.00 (121) Dist: 00000.00 Q: 0 
+angle = 72davam do 0
+   thetaaa: 72.59 (122) Dist: 00000.00 Q: 0 
+angle = 73davam do 0
+   thetaaa: 73.19 (123) Dist: 00000.00 Q: 0 
+angle = 73
+   thetaaa: 73.45 (124) Dist: 00121.00 Q: 47 
+angle = 73
+   thetaaa: 73.78 (125) Dist: 00000.00 Q: 0 
+angle = 74davam do 0
+   thetaaa: 74.38 (126) Dist: 00000.00 Q: 0 
+angle = 74
+   thetaaa: 74.97 (127) Dist: 00000.00 Q: 0 
+angle = 75davam do 0
+   thetaaa: 75.56 (128) Dist: 00000.00 Q: 0 
+angle = 76davam do 0
+   thetaaa: 76.75 (129) Dist: 00000.00 Q: 0 
+angle = 77davam do 0
+   thetaaa: 77.34 (130) Dist: 00000.00 Q: 0 
+angle = 77
+   thetaaa: 77.94 (131) Dist: 00000.00 Q: 0 
+angle = 78davam do 0
+   thetaaa: 78.53 (132) Dist: 00000.00 Q: 0 
+angle = 79davam do 0
+   thetaaa: 78.66 (133) Dist: 00134.00 Q: 47 
+angle = 79
+   thetaaa: 79.12 (134) Dist: 00000.00 Q: 0 
+angle = 79
+   thetaaa: 79.23 (135) Dist: 00136.00 Q: 47 
+angle = 79
+   thetaaa: 79.73 (136) Dist: 00000.00 Q: 0 
+angle = 80davam do 0
+   thetaaa: 80.33 (137) Dist: 00000.00 Q: 0 
+angle = 80
+   thetaaa: 80.92 (138) Dist: 00000.00 Q: 0 
+angle = 81davam do 0
+   thetaaa: 82.70 (139) Dist: 00000.00 Q: 0 
+angle = 83davam do 0
+   thetaaa: 83.30 (140) Dist: 00000.00 Q: 0 
+angle = 83
+   thetaaa: 83.89 (141) Dist: 00000.00 Q: 0 
+angle = 84davam do 0
+   thetaaa: 84.48 (142) Dist: 00000.00 Q: 0 
+angle = 84
+   thetaaa: 85.08 (143) Dist: 00000.00 Q: 0 
+angle = 85davam do 0
+   thetaaa: 85.67 (144) Dist: 00000.00 Q: 0 
+angle = 86davam do 0
+   thetaaa: 86.27 (145) Dist: 00000.00 Q: 0 
+angle = 86
+   thetaaa: 86.88 (146) Dist: 00000.00 Q: 0 
+angle = 87davam do 0
+   thetaaa: 87.47 (147) Dist: 00000.00 Q: 0 
+angle = 87
+   thetaaa: 88.06 (148) Dist: 00000.00 Q: 0 
+angle = 88davam do 0
+   thetaaa: 88.66 (149) Dist: 00000.00 Q: 0 
+angle = 89davam do 0
+   thetaaa: 89.25 (150) Dist: 00000.00 Q: 0 
+angle = 89
+   thetaaa: 89.84 (151) Dist: 00000.00 Q: 0 
+angle = 90davam do 0
+   thetaaa: 90.44 (152) Dist: 00000.00 Q: 0 
+angle = 90
+   thetaaa: 91.03 (153) Dist: 00000.00 Q: 0 
+angle = 91davam do 0
+   thetaaa: 91.62 (154) Dist: 00000.00 Q: 0 
+angle = 92davam do 0
+   thetaaa: 92.22 (155) Dist: 00000.00 Q: 0 
+angle = 92
+   thetaaa: 92.81 (156) Dist: 00000.00 Q: 0 
+angle = 93davam do 0
+   thetaaa: 93.41 (157) Dist: 00000.00 Q: 0 
+angle = 93
+   thetaaa: 94.02 (158) Dist: 00000.00 Q: 0 
+angle = 94davam do 0
+   thetaaa: 94.61 (159) Dist: 00000.00 Q: 0 
+angle = 95davam do 0
+   thetaaa: 95.20 (160) Dist: 00000.00 Q: 0 
+angle = 95
+   thetaaa: 95.80 (161) Dist: 00000.00 Q: 0 
+angle = 96davam do 0
+   thetaaa: 96.17 (162) Dist: 00421.00 Q: 47 
+angle = 96
+   thetaaa: 96.39 (163) Dist: 00000.00 Q: 0 
+angle = 96
+   thetaaa: 96.89 (164) Dist: 00420.00 Q: 47 
+angle = 97davam do 0
+   thetaaa: 96.98 (165) Dist: 00000.00 Q: 0 
+angle = 97
+   thetaaa: 97.48 (166) Dist: 00413.00 Q: 47 
+angle = 97
+   thetaaa: 97.58 (167) Dist: 00000.00 Q: 0 
+angle = 98davam do 0
+   thetaaa: 98.17 (168) Dist: 00000.00 Q: 0 
+angle = 98
+   thetaaa: 98.77 (169) Dist: 00000.00 Q: 0 
+angle = 99davam do 0
+   thetaaa: 98.78 (170) Dist: 00412.00 Q: 47 
+angle = 99
+   thetaaa: 99.36 (171) Dist: 00000.00 Q: 0 
+angle = 99
+   thetaaa: 99.95 (172) Dist: 00000.00 Q: 0 
+angle = 100davam do 0
+   thetaaa: 100.42 (173) Dist: 00412.00 Q: 47 
+angle = 100
+   thetaaa: 100.55 (174) Dist: 00000.00 Q: 0 
+angle = 101davam do 0
+   thetaaa: 101.16 (175) Dist: 00000.00 Q: 0 
+angle = 101
+   thetaaa: 101.75 (176) Dist: 00000.00 Q: 0 
+angle = 102davam do 0
+   thetaaa: 102.34 (177) Dist: 00000.00 Q: 0 
+angle = 102
+   thetaaa: 102.94 (178) Dist: 00000.00 Q: 0 
+angle = 103davam do 0
+   thetaaa: 103.53 (179) Dist: 00000.00 Q: 0 
+angle = 104davam do 0
+   thetaaa: 105.20 (180) Dist: 00411.00 Q: 47 
+angle = 105davam do 0
+   thetaaa: 105.91 (181) Dist: 00000.00 Q: 0 
+angle = 106davam do 0
+   thetaaa: 106.83 (182) Dist: 00414.00 Q: 47 
+angle = 107davam do 0
+   thetaaa: 107.09 (183) Dist: 00000.00 Q: 0 
+angle = 107
+   thetaaa: 107.69 (184) Dist: 00000.00 Q: 0 
+angle = 108davam do 0
+   thetaaa: 108.12 (185) Dist: 00417.00 Q: 47 
+angle = 108
+   thetaaa: 108.45 (186) Dist: 00420.00 Q: 47 
+angle = 108
+   thetaaa: 108.89 (187) Dist: 00000.00 Q: 0 
+angle = 109davam do 0
+   thetaaa: 109.05 (188) Dist: 00421.00 Q: 47 
+angle = 109
+   thetaaa: 109.48 (189) Dist: 00000.00 Q: 0 
+angle = 109
+   thetaaa: 109.88 (190) Dist: 00422.00 Q: 47 
+angle = 110davam do 0
+   thetaaa: 110.08 (191) Dist: 00000.00 Q: 0 
+angle = 110
+   thetaaa: 110.67 (192) Dist: 00000.00 Q: 0 
+angle = 111davam do 0
+   thetaaa: 111.27 (193) Dist: 00000.00 Q: 0 
+angle = 111
+   thetaaa: 111.45 (194) Dist: 00538.00 Q: 47 
+angle = 111
+   thetaaa: 111.86 (195) Dist: 00000.00 Q: 0 
+angle = 112davam do 0
+   thetaaa: 111.91 (196) Dist: 00539.00 Q: 47 
+angle = 112
+   thetaaa: 112.38 (197) Dist: 00540.00 Q: 47 
+angle = 112
+   thetaaa: 112.45 (198) Dist: 00000.00 Q: 0 
+angle = 112
+   thetaaa: 113.08 (199) Dist: 00541.00 Q: 47 
+angle = 113davam do 0
+   thetaaa: 113.53 (200) Dist: 00542.00 Q: 47 
+angle = 114davam do 0
+   thetaaa: 113.64 (201) Dist: 00000.00 Q: 0 
+angle = 114
+   thetaaa: 114.23 (202) Dist: 00000.00 Q: 0 
+angle = 114
+   thetaaa: 114.38 (203) Dist: 00542.00 Q: 47 
+angle = 114
+   thetaaa: 114.70 (204) Dist: 00544.00 Q: 47 
+angle = 115davam do 0
+   thetaaa: 115.41 (205) Dist: 00545.00 Q: 47 
+angle = 115
+   thetaaa: 115.44 (206) Dist: 00000.00 Q: 0 
+angle = 115
+   thetaaa: 115.88 (207) Dist: 00546.00 Q: 47 
+angle = 116davam do 0
+   thetaaa: 116.58 (208) Dist: 00552.00 Q: 47 
+angle = 117davam do 0
+   thetaaa: 118.03 (209) Dist: 00432.00 Q: 47 
+angle = 118davam do 0
+   thetaaa: 118.41 (210) Dist: 00000.00 Q: 0 
+angle = 118
+   thetaaa: 118.75 (211) Dist: 00420.00 Q: 47 
+angle = 119davam do 0
+   thetaaa: 119.00 (212) Dist: 00000.00 Q: 0 
+angle = 119
+   thetaaa: 119.08 (213) Dist: 00411.00 Q: 47 
+angle = 119
+   thetaaa: 119.59 (214) Dist: 00000.00 Q: 0 
+angle = 120davam do 0
+   thetaaa: 119.80 (215) Dist: 00402.00 Q: 47 
+angle = 120
+   thetaaa: 120.64 (216) Dist: 00393.00 Q: 47 
+angle = 121davam do 0
+   thetaaa: 121.09 (217) Dist: 00386.00 Q: 47 
+angle = 121
+   thetaaa: 121.81 (218) Dist: 00376.00 Q: 47 
+angle = 122davam do 0
+   thetaaa: 122.41 (219) Dist: 00360.00 Q: 47 
+angle = 122
+   thetaaa: 124.95 (220) Dist: 00315.00 Q: 47 
+angle = 125davam do 0
+   thetaaa: 125.88 (221) Dist: 00592.00 Q: 47 
+angle = 126davam do 0
+   thetaaa: 126.45 (222) Dist: 00580.00 Q: 47 
+angle = 126
+   thetaaa: 126.92 (223) Dist: 00577.00 Q: 47 
+angle = 127davam do 0
+   thetaaa: 127.14 (224) Dist: 00263.00 Q: 47 
+angle = 127
+   thetaaa: 127.47 (225) Dist: 00259.00 Q: 47 
+angle = 127
+   thetaaa: 128.94 (226) Dist: 00250.00 Q: 47 
+angle = 129davam do 0
+   thetaaa: 129.16 (227) Dist: 00613.00 Q: 47 
+angle = 129
+   thetaaa: 130.00 (228) Dist: 00604.00 Q: 47 
+angle = 130davam do 0
+   thetaaa: 130.45 (229) Dist: 00601.00 Q: 47 
+angle = 130
+   thetaaa: 130.91 (230) Dist: 00000.00 Q: 0 
+angle = 131davam do 0
+   thetaaa: 130.92 (231) Dist: 00603.00 Q: 47 
+angle = 131
+   thetaaa: 131.64 (232) Dist: 00607.00 Q: 47 
+angle = 132davam do 0
+   thetaaa: 132.09 (233) Dist: 00000.00 Q: 0 
+angle = 132
+   thetaaa: 132.22 (234) Dist: 00609.00 Q: 47 
+angle = 132
+   thetaaa: 132.81 (235) Dist: 00614.00 Q: 47 
+angle = 133davam do 0
+   thetaaa: 133.28 (236) Dist: 00617.00 Q: 47 
+angle = 133
+   thetaaa: 134.00 (237) Dist: 00622.00 Q: 47 
+angle = 134davam do 0
+   thetaaa: 134.45 (238) Dist: 00626.00 Q: 47 
+angle = 134
+   thetaaa: 134.47 (239) Dist: 00000.00 Q: 0 
+angle = 134
+   thetaaa: 135.05 (240) Dist: 00630.00 Q: 47 
+angle = 135davam do 0
+   thetaaa: 135.64 (241) Dist: 00634.00 Q: 47 
+angle = 136davam do 0
+   thetaaa: 136.23 (242) Dist: 00637.00 Q: 47 
+angle = 136
+   thetaaa: 136.69 (243) Dist: 00643.00 Q: 47 
+angle = 137davam do 0
+   thetaaa: 136.86 (244) Dist: 00000.00 Q: 0 
+angle = 137
+   thetaaa: 137.41 (245) Dist: 00647.00 Q: 47 
+angle = 137
+   thetaaa: 137.45 (246) Dist: 00000.00 Q: 0 
+angle = 137
+   thetaaa: 137.86 (247) Dist: 00651.00 Q: 47 
+angle = 138davam do 0
+   thetaaa: 138.05 (248) Dist: 00000.00 Q: 0 
+angle = 138
+   thetaaa: 138.45 (249) Dist: 00656.00 Q: 47 
+angle = 138
+   thetaaa: 139.16 (250) Dist: 00660.00 Q: 47 
+angle = 139davam do 0
+   thetaaa: 139.62 (251) Dist: 00664.00 Q: 47 
+angle = 140davam do 0
+   thetaaa: 140.20 (252) Dist: 00669.00 Q: 47 
+angle = 140
+   thetaaa: 140.80 (253) Dist: 00674.00 Q: 47 
+angle = 141davam do 0
+   thetaaa: 141.27 (254) Dist: 00679.00 Q: 47 
+angle = 141
+   thetaaa: 141.97 (255) Dist: 00684.00 Q: 47 
+angle = 142davam do 0
+   thetaaa: 142.44 (256) Dist: 00690.00 Q: 47 
+angle = 142
+   thetaaa: 143.02 (257) Dist: 00694.00 Q: 47 
+angle = 143davam do 0
+   thetaaa: 143.61 (258) Dist: 00700.00 Q: 47 
+angle = 144davam do 0
+   thetaaa: 144.19 (259) Dist: 00706.00 Q: 47 
+angle = 144
+   thetaaa: 144.66 (260) Dist: 00712.00 Q: 47 
+angle = 145davam do 0
+   thetaaa: 145.38 (261) Dist: 00718.00 Q: 47 
+angle = 145
+   thetaaa: 145.95 (262) Dist: 00726.00 Q: 47 
+angle = 146davam do 0
+   thetaaa: 150.53 (263) Dist: 00783.00 Q: 47 
+angle = 151davam do 0
+   thetaaa: 150.98 (264) Dist: 00797.00 Q: 47 
+angle = 151
+   thetaaa: 151.58 (265) Dist: 00799.00 Q: 47 
+angle = 152davam do 0
+   thetaaa: 152.16 (266) Dist: 00809.00 Q: 47 
+angle = 152
+   thetaaa: 153.33 (267) Dist: 00829.00 Q: 47 
+angle = 153davam do 0
+   thetaaa: 153.80 (268) Dist: 00839.00 Q: 47 
+angle = 154davam do 0
+   thetaaa: 154.98 (269) Dist: 00842.00 Q: 47 
+angle = 155davam do 0
+   thetaaa: 156.30 (270) Dist: 00806.00 Q: 47 
+angle = 156davam do 0
+   thetaaa: 156.48 (271) Dist: 00000.00 Q: 0 
+angle = 156
+   thetaaa: 156.91 (272) Dist: 00820.00 Q: 47 
+angle = 157davam do 0
+   thetaaa: 157.08 (273) Dist: 00000.00 Q: 0 
+angle = 157
+   thetaaa: 157.67 (274) Dist: 00000.00 Q: 0 
+angle = 158davam do 0
+   thetaaa: 158.09 (275) Dist: 00841.00 Q: 47 
+angle = 158
+   thetaaa: 158.27 (276) Dist: 00000.00 Q: 0 
+angle = 158
+   thetaaa: 158.88 (277) Dist: 00000.00 Q: 0 
+angle = 159davam do 0
+   thetaaa: 159.47 (278) Dist: 00000.00 Q: 0 
+angle = 159
+   thetaaa: 160.06 (279) Dist: 00000.00 Q: 0 
+angle = 160davam do 0
+   thetaaa: 163.03 (280) Dist: 00000.00 Q: 0 
+angle = 163davam do 0
+   thetaaa: 164.81 (281) Dist: 00000.00 Q: 0 
+angle = 165davam do 0
+   thetaaa: 165.55 (282) Dist: 00128.00 Q: 47 
+angle = 166davam do 0
+   thetaaa: 166.02 (283) Dist: 00000.00 Q: 0 
+angle = 166
+   thetaaa: 166.14 (284) Dist: 00129.00 Q: 47 
+angle = 166
+   thetaaa: 166.73 (285) Dist: 00128.00 Q: 47 
+angle = 167davam do 0
+   thetaaa: 167.80 (286) Dist: 00000.00 Q: 0 
+angle = 168davam do 0
+   thetaaa: 168.98 (287) Dist: 00000.00 Q: 0 
+angle = 169davam do 0
+   thetaaa: 171.36 (288) Dist: 00000.00 Q: 0 
+angle = 171davam do 0
+   thetaaa: 171.95 (289) Dist: 00000.00 Q: 0 
+angle = 172davam do 0
+   thetaaa: 172.55 (290) Dist: 00000.00 Q: 0 
+angle = 173davam do 0
+   thetaaa: 173.16 (291) Dist: 00000.00 Q: 0 
+angle = 173
+   thetaaa: 173.75 (292) Dist: 00000.00 Q: 0 
+angle = 174davam do 0
+   thetaaa: 174.34 (293) Dist: 00000.00 Q: 0 
+angle = 174
+   thetaaa: 174.94 (294) Dist: 00000.00 Q: 0 
+angle = 175davam do 0
+   thetaaa: 175.53 (295) Dist: 00000.00 Q: 0 
+angle = 176davam do 0
+   thetaaa: 176.12 (296) Dist: 00000.00 Q: 0 
+angle = 176
+   thetaaa: 176.72 (297) Dist: 00000.00 Q: 0 
+angle = 177davam do 0
+   thetaaa: 177.31 (298) Dist: 00000.00 Q: 0 
+angle = 177
+   thetaaa: 177.91 (299) Dist: 00000.00 Q: 0 
+angle = 178davam do 0
+   thetaaa: 178.50 (300) Dist: 00000.00 Q: 0 
+angle = 179davam do 0
+   thetaaa: 179.09 (301) Dist: 00000.00 Q: 0 
+angle = 179
+   thetaaa: 179.69 (302) Dist: 00000.00 Q: 0 
+angle = 180davam do 0
+   thetaaa: 180.30 (303) Dist: 00000.00 Q: 0 
+angle = 180
+   thetaaa: 180.89 (304) Dist: 00000.00 Q: 0 
+angle = 181davam do 0
+   thetaaa: 181.48 (305) Dist: 00000.00 Q: 0 
+angle = 181
+   thetaaa: 182.08 (306) Dist: 00000.00 Q: 0 
+angle = 182davam do 0
+   thetaaa: 182.39 (307) Dist: 00931.00 Q: 47 
+angle = 182
+   thetaaa: 182.67 (308) Dist: 00000.00 Q: 0 
+angle = 183davam do 0
+   thetaaa: 182.88 (309) Dist: 00932.00 Q: 47 
+angle = 183
+   thetaaa: 183.27 (310) Dist: 00000.00 Q: 0 
+angle = 183
+   thetaaa: 183.59 (311) Dist: 00926.00 Q: 47 
+angle = 184davam do 0
+   thetaaa: 183.86 (312) Dist: 00000.00 Q: 0 
+angle = 184
+   thetaaa: 184.19 (313) Dist: 00926.00 Q: 47 
+angle = 184
+   thetaaa: 184.45 (314) Dist: 00000.00 Q: 0 
+angle = 184
+   thetaaa: 185.05 (315) Dist: 00000.00 Q: 0 
+angle = 185davam do 0
+   thetaaa: 185.64 (316) Dist: 00000.00 Q: 0 
+angle = 186davam do 0
+   thetaaa: 185.98 (317) Dist: 00921.00 Q: 47 
+angle = 186
+   thetaaa: 186.23 (318) Dist: 00000.00 Q: 0 
+angle = 186
+   thetaaa: 186.59 (319) Dist: 00919.00 Q: 47 
+angle = 187davam do 0
+   thetaaa: 186.83 (320) Dist: 00000.00 Q: 0 
+angle = 187
+   thetaaa: 187.19 (321) Dist: 00915.00 Q: 47 
+angle = 187
+   thetaaa: 187.44 (322) Dist: 00000.00 Q: 0 
+angle = 187
+   thetaaa: 188.03 (323) Dist: 00000.00 Q: 0 
+angle = 188davam do 0
+   thetaaa: 188.62 (324) Dist: 00000.00 Q: 0 
+angle = 189davam do 0
+   thetaaa: 189.22 (325) Dist: 00000.00 Q: 0 
+angle = 189
+   thetaaa: 189.27 (326) Dist: 00582.00 Q: 47 
+angle = 189
+   thetaaa: 189.81 (327) Dist: 00000.00 Q: 0 
+angle = 190davam do 0
+   thetaaa: 189.86 (328) Dist: 00585.00 Q: 47 
+angle = 190
+   thetaaa: 190.41 (329) Dist: 00000.00 Q: 0 
+angle = 190
+   thetaaa: 191.00 (330) Dist: 00000.00 Q: 0 
+angle = 191davam do 0
+   thetaaa: 191.59 (331) Dist: 00000.00 Q: 0 
+angle = 192davam do 0
+   thetaaa: 192.02 (332) Dist: 00629.00 Q: 47 
+angle = 192
+   thetaaa: 192.19 (333) Dist: 00000.00 Q: 0 
+angle = 192
+   thetaaa: 192.98 (334) Dist: 00593.00 Q: 47 
+angle = 193davam do 0
+   thetaaa: 193.47 (335) Dist: 00615.00 Q: 47 
+angle = 193
+   thetaaa: 193.94 (336) Dist: 00615.00 Q: 47 
+angle = 194davam do 0
+   thetaaa: 194.67 (337) Dist: 00617.00 Q: 47 
+angle = 195davam do 0
+   thetaaa: 195.14 (338) Dist: 00620.00 Q: 47 
+angle = 195
+   thetaaa: 195.17 (339) Dist: 00000.00 Q: 0 
+angle = 195
+   thetaaa: 195.77 (340) Dist: 00000.00 Q: 0 
+angle = 196davam do 0
+   thetaaa: 195.88 (341) Dist: 00623.00 Q: 47 
+angle = 196
+   thetaaa: 196.47 (342) Dist: 00629.00 Q: 47 
+angle = 196
+   thetaaa: 196.95 (343) Dist: 00634.00 Q: 47 
+angle = 197davam do 0
+   thetaaa: 197.56 (344) Dist: 00638.00 Q: 47 
+angle = 198davam do 0
+   thetaaa: 198.03 (345) Dist: 00643.00 Q: 47 
+angle = 198
+   thetaaa: 198.14 (346) Dist: 00000.00 Q: 0 
+angle = 198
+   thetaaa: 198.64 (347) Dist: 00651.00 Q: 47 
+angle = 199davam do 0
+   thetaaa: 199.23 (348) Dist: 00656.00 Q: 47 
+angle = 199
+   thetaaa: 199.84 (349) Dist: 00663.00 Q: 47 
+angle = 200davam do 0
+   thetaaa: 199.92 (350) Dist: 00000.00 Q: 0 
+angle = 200
+   thetaaa: 200.52 (351) Dist: 00000.00 Q: 0 
+angle = 201davam do 0
+   thetaaa: 200.58 (352) Dist: 00668.00 Q: 47 
+angle = 201
+   thetaaa: 200.92 (353) Dist: 00675.00 Q: 47 
+angle = 201
+   thetaaa: 201.11 (354) Dist: 00000.00 Q: 0 
+angle = 201
+   thetaaa: 201.53 (355) Dist: 00680.00 Q: 47 
+angle = 202davam do 0
+   thetaaa: 202.12 (356) Dist: 00689.00 Q: 47 
+angle = 202
+   thetaaa: 202.73 (357) Dist: 00695.00 Q: 47 
+angle = 203davam do 0
+   thetaaa: 203.34 (358) Dist: 00703.00 Q: 47 
+angle = 203
+   thetaaa: 203.94 (359) Dist: 00711.00 Q: 47 
+angle = 204davam do 0
+   thetaaa: 204.55 (360) Dist: 00717.00 Q: 47 
+angle = 205davam do 0
+   thetaaa: 205.02 (361) Dist: 00730.00 Q: 47 
+angle = 205
+   thetaaa: 205.62 (362) Dist: 00742.00 Q: 47 
+angle = 206davam do 0
+   thetaaa: 206.23 (363) Dist: 00755.00 Q: 47 
+angle = 206
+   thetaaa: 206.83 (364) Dist: 00762.00 Q: 47 
+angle = 207davam do 0
+   thetaaa: 207.31 (365) Dist: 00767.00 Q: 47 
+angle = 207
+   thetaaa: 207.91 (366) Dist: 00768.00 Q: 47 
+angle = 208davam do 0
+   thetaaa: 208.64 (367) Dist: 00770.00 Q: 47 
+angle = 209davam do 0
+   thetaaa: 209.12 (368) Dist: 00765.00 Q: 47 
+angle = 209
+   thetaaa: 209.84 (369) Dist: 00763.00 Q: 47 
+angle = 210davam do 0
+   thetaaa: 210.33 (370) Dist: 00764.00 Q: 47 
+angle = 210
+   thetaaa: 210.92 (371) Dist: 00764.00 Q: 47 
+angle = 211davam do 0
+   thetaaa: 211.53 (372) Dist: 00766.00 Q: 47 
+angle = 212davam do 0
+   thetaaa: 212.27 (373) Dist: 00764.00 Q: 47 
+angle = 212
+   thetaaa: 212.86 (374) Dist: 00766.00 Q: 47 
+angle = 213davam do 0
+   thetaaa: 213.45 (375) Dist: 00767.00 Q: 47 
+angle = 213
+   thetaaa: 213.94 (376) Dist: 00767.00 Q: 47 
+angle = 214davam do 0
+   thetaaa: 214.53 (377) Dist: 00768.00 Q: 47 
+angle = 215davam do 0
+   thetaaa: 215.14 (378) Dist: 00769.00 Q: 47 
+angle = 215
+   thetaaa: 215.86 (379) Dist: 00772.00 Q: 47 
+angle = 216davam do 0
+   thetaaa: 216.47 (380) Dist: 00770.00 Q: 47 
+angle = 216
+   thetaaa: 217.06 (381) Dist: 00770.00 Q: 47 
+angle = 217davam do 0
+   thetaaa: 217.66 (382) Dist: 00770.00 Q: 47 
+angle = 218davam do 0
+   thetaaa: 218.27 (383) Dist: 00776.00 Q: 47 
+angle = 218
+   thetaaa: 218.73 (384) Dist: 00778.00 Q: 47 
+angle = 219davam do 0
+   thetaaa: 219.34 (385) Dist: 00749.00 Q: 47 
+angle = 219
+   thetaaa: 220.19 (386) Dist: 00724.00 Q: 47 
+angle = 220davam do 0
+   thetaaa: 220.80 (387) Dist: 00713.00 Q: 47 
+angle = 221davam do 0
+   thetaaa: 221.52 (388) Dist: 00703.00 Q: 47 
+angle = 222davam do 0
+   thetaaa: 222.00 (389) Dist: 00696.00 Q: 47 
+angle = 222
+   thetaaa: 222.59 (390) Dist: 00690.00 Q: 47 
+angle = 223davam do 0
+   thetaaa: 223.31 (391) Dist: 00686.00 Q: 47 
+angle = 223
+   thetaaa: 223.92 (392) Dist: 00686.00 Q: 47 
+angle = 224davam do 0
+   thetaaa: 224.52 (393) Dist: 00687.00 Q: 47 
+angle = 225davam do 0
+   thetaaa: 225.00 (394) Dist: 00687.00 Q: 47 
+angle = 225
+   thetaaa: 225.59 (395) Dist: 00686.00 Q: 47 
+angle = 226davam do 0
+   thetaaa: 226.20 (396) Dist: 00682.00 Q: 47 
+angle = 226
+   thetaaa: 226.92 (397) Dist: 00679.00 Q: 47 
+angle = 227davam do 0
+   thetaaa: 227.39 (398) Dist: 00680.00 Q: 47 
+angle = 227
+   thetaaa: 228.00 (399) Dist: 00680.00 Q: 47 
+angle = 228davam do 0
+   thetaaa: 228.59 (400) Dist: 00670.00 Q: 47 
+angle = 229davam do 0
+   thetaaa: 229.33 (401) Dist: 00665.00 Q: 47 
+angle = 229
+   thetaaa: 229.92 (402) Dist: 00664.00 Q: 47 
+angle = 230davam do 0
+   thetaaa: 230.66 (403) Dist: 00662.00 Q: 47 
+angle = 231davam do 0
+   thetaaa: 231.12 (404) Dist: 00667.00 Q: 47 
+angle = 231
+   thetaaa: 231.73 (405) Dist: 00676.00 Q: 47 
+angle = 232davam do 0
+   thetaaa: 232.33 (406) Dist: 00678.00 Q: 47 
+angle = 232
+   thetaaa: 232.92 (407) Dist: 00677.00 Q: 47 
+angle = 233davam do 0
+   thetaaa: 233.53 (408) Dist: 00671.00 Q: 47 
+angle = 234davam do 0
+   thetaaa: 234.12 (409) Dist: 00666.00 Q: 47 
+angle = 234
+   thetaaa: 234.73 (410) Dist: 00661.00 Q: 47 
+angle = 235davam do 0
+   thetaaa: 235.33 (411) Dist: 00655.00 Q: 47 
+angle = 235
+   thetaaa: 235.92 (412) Dist: 00653.00 Q: 47 
+angle = 236davam do 0
+   thetaaa: 236.66 (413) Dist: 00653.00 Q: 47 
+angle = 237davam do 0
+   thetaaa: 237.12 (414) Dist: 00653.00 Q: 47 
+angle = 237
+   thetaaa: 237.73 (415) Dist: 00653.00 Q: 47 
+angle = 238davam do 0
+   thetaaa: 238.33 (416) Dist: 00653.00 Q: 47 
+angle = 238
+   thetaaa: 238.92 (417) Dist: 00652.00 Q: 47 
+angle = 239davam do 0
+   thetaaa: 239.53 (418) Dist: 00653.00 Q: 47 
+angle = 240davam do 0
+   thetaaa: 240.12 (419) Dist: 00655.00 Q: 47 
+angle = 240
+   thetaaa: 240.86 (420) Dist: 00634.00 Q: 47 
+angle = 241davam do 0
+   thetaaa: 241.33 (421) Dist: 00632.00 Q: 47 
+angle = 241
+   thetaaa: 241.92 (422) Dist: 00636.00 Q: 47 
+angle = 242davam do 0
+   thetaaa: 242.53 (423) Dist: 00645.00 Q: 47 
+angle = 243davam do 0
+   thetaaa: 243.12 (424) Dist: 00661.00 Q: 47 
+angle = 243
+   thetaaa: 243.73 (425) Dist: 00669.00 Q: 47 
+angle = 244davam do 0
+   thetaaa: 244.20 (426) Dist: 00670.00 Q: 47 
+angle = 244
+   thetaaa: 244.92 (427) Dist: 00669.00 Q: 47 
+angle = 245davam do 0
+   thetaaa: 245.53 (428) Dist: 00665.00 Q: 47 
+angle = 246davam do 0
+   thetaaa: 246.12 (429) Dist: 00664.00 Q: 47 
+angle = 246
+   thetaaa: 246.73 (430) Dist: 00667.00 Q: 47 
+angle = 247davam do 0
+   thetaaa: 247.20 (431) Dist: 00703.00 Q: 47 
+angle = 247
+   thetaaa: 247.80 (432) Dist: 00715.00 Q: 47 
+angle = 248davam do 0
+   thetaaa: 248.28 (433) Dist: 00729.00 Q: 47 
+angle = 248
+   thetaaa: 248.88 (434) Dist: 00737.00 Q: 47 
+angle = 249davam do 0
+   thetaaa: 249.36 (435) Dist: 00749.00 Q: 47 
+angle = 249
+   thetaaa: 250.08 (436) Dist: 00765.00 Q: 47 
+angle = 250davam do 0
+   thetaaa: 255.20 (437) Dist: 03295.00 Q: 47 
+angle = 255davam do 0
+   thetaaa: 255.81 (438) Dist: 03239.00 Q: 47 
+angle = 256davam do 0
+   thetaaa: 256.41 (439) Dist: 03214.00 Q: 47 
+angle = 256
+   thetaaa: 257.02 (440) Dist: 03208.00 Q: 47 
+angle = 257davam do 0
+   thetaaa: 257.61 (441) Dist: 03191.00 Q: 47 
+angle = 258davam do 0
+   thetaaa: 258.22 (442) Dist: 03184.00 Q: 47 
+angle = 258
+   thetaaa: 258.83 (443) Dist: 03171.00 Q: 47 
+angle = 259davam do 0
+   thetaaa: 259.42 (444) Dist: 03145.00 Q: 47 
+angle = 259
+   thetaaa: 260.03 (445) Dist: 00000.00 Q: 0 
+angle = 260davam do 0
+   thetaaa: 260.03 (446) Dist: 03130.00 Q: 47 
+angle = 260
+   thetaaa: 260.62 (447) Dist: 00000.00 Q: 0 
+angle = 261davam do 0
+   thetaaa: 260.62 (448) Dist: 03119.00 Q: 47 
+angle = 261
+   thetaaa: 261.22 (449) Dist: 00000.00 Q: 0 
+angle = 261
+   thetaaa: 261.81 (450) Dist: 00000.00 Q: 0 
+angle = 262davam do 0
+   thetaaa: 262.41 (451) Dist: 00000.00 Q: 0 
+angle = 262
+   thetaaa: 263.00 (452) Dist: 00000.00 Q: 0 
+angle = 263davam do 0
+   thetaaa: 263.23 (453) Dist: 00586.00 Q: 47 
+angle = 263
+   thetaaa: 263.59 (454) Dist: 00000.00 Q: 0 
+angle = 264davam do 0
+   thetaaa: 264.08 (455) Dist: 00561.00 Q: 47 
+angle = 264
+   thetaaa: 264.19 (456) Dist: 00000.00 Q: 0 
+angle = 264
+   thetaaa: 264.56 (457) Dist: 00550.00 Q: 47 
+angle = 265davam do 0
+   thetaaa: 264.78 (458) Dist: 00000.00 Q: 0 
+angle = 265
+   thetaaa: 265.16 (459) Dist: 00542.00 Q: 47 
+angle = 265
+   thetaaa: 265.38 (460) Dist: 00000.00 Q: 0 
+angle = 265
+   thetaaa: 265.77 (461) Dist: 00536.00 Q: 47 
+angle = 266davam do 0
+   thetaaa: 266.50 (462) Dist: 00530.00 Q: 47 
+angle = 267davam do 0
+   thetaaa: 267.34 (463) Dist: 00527.00 Q: 47 
+angle = 267
+   thetaaa: 267.83 (464) Dist: 00524.00 Q: 47 
+angle = 268davam do 0
+   thetaaa: 268.55 (465) Dist: 00520.00 Q: 47 
+angle = 269davam do 0
+   thetaaa: 268.91 (466) Dist: 00520.00 Q: 47 
+angle = 269
+   thetaaa: 269.75 (467) Dist: 00519.00 Q: 47 
+angle = 270davam do 0
+   thetaaa: 270.36 (468) Dist: 00516.00 Q: 47 
+angle = 270
+   thetaaa: 270.97 (469) Dist: 00515.00 Q: 47 
+angle = 271davam do 0
+   thetaaa: 271.45 (470) Dist: 00516.00 Q: 47 
+angle = 271
+   thetaaa: 272.06 (471) Dist: 00516.00 Q: 47 
+angle = 272davam do 0
+   thetaaa: 272.80 (472) Dist: 00516.00 Q: 47 
+angle = 273davam do 0
+   thetaaa: 273.17 (473) Dist: 00515.00 Q: 47 
+angle = 273
+   thetaaa: 273.91 (474) Dist: 00513.00 Q: 47 
+angle = 274davam do 0
+   thetaaa: 274.39 (475) Dist: 00512.00 Q: 47 
+angle = 274
+   thetaaa: 275.12 (476) Dist: 00511.00 Q: 47 
+angle = 275davam do 0
+   thetaaa: 275.75 (477) Dist: 00510.00 Q: 47 
+angle = 276davam do 0
+   thetaaa: 276.61 (478) Dist: 00508.00 Q: 47 
+angle = 277davam do 0
+   thetaaa: 277.09 (479) Dist: 00510.00 Q: 47 
+angle = 277
+   thetaaa: 277.58 (480) Dist: 00509.00 Q: 47 
+angle = 278davam do 0
+   thetaaa: 278.33 (481) Dist: 00510.00 Q: 47 
+angle = 278
+   thetaaa: 278.81 (482) Dist: 00512.00 Q: 47 
+angle = 279davam do 0
+   thetaaa: 279.55 (483) Dist: 00514.00 Q: 47 
+angle = 280davam do 0
+   thetaaa: 279.91 (484) Dist: 00515.00 Q: 47 
+angle = 280
+   thetaaa: 280.66 (485) Dist: 00520.00 Q: 47 
+angle = 281davam do 0
+   thetaaa: 281.14 (486) Dist: 00523.00 Q: 47 
+angle = 281
+   thetaaa: 281.75 (487) Dist: 00533.00 Q: 47 
+angle = 282davam do 0
+   thetaaa: 284.41 (488) Dist: 02895.00 Q: 47 
+angle = 284davam do 0
+   thetaaa: 285.02 (489) Dist: 02882.00 Q: 47 
+angle = 285davam do 0
+   thetaaa: 285.64 (490) Dist: 02886.00 Q: 47 
+angle = 286davam do 0
+   thetaaa: 286.38 (491) Dist: 02885.00 Q: 47 
+angle = 286
+   thetaaa: 286.86 (492) Dist: 02899.00 Q: 47 
+angle = 287davam do 0
+   thetaaa: 287.59 (493) Dist: 02900.00 Q: 47 
+angle = 288davam do 0
+   thetaaa: 288.22 (494) Dist: 02889.00 Q: 47 
+angle = 288
+   thetaaa: 288.69 (495) Dist: 02901.00 Q: 47 
+angle = 289davam do 0
+   thetaaa: 289.42 (496) Dist: 02906.00 Q: 47 
+angle = 289
+   thetaaa: 290.03 (497) Dist: 02904.00 Q: 47 
+angle = 290davam do 0
+   thetaaa: 290.38 (498) Dist: 00000.00 Q: 0 
+angle = 290
+   thetaaa: 290.52 (499) Dist: 02916.00 Q: 47 
+angle = 291davam do 0
+   thetaaa: 290.97 (500) Dist: 00000.00 Q: 0 
+angle = 291
+   thetaaa: 291.25 (501) Dist: 02910.00 Q: 47 
+angle = 291
+   thetaaa: 291.56 (502) Dist: 00000.00 Q: 0 
+angle = 292davam do 0
+   thetaaa: 291.73 (503) Dist: 02916.00 Q: 47 
+angle = 292
+   thetaaa: 292.16 (504) Dist: 00000.00 Q: 0 
+angle = 292
+   thetaaa: 292.34 (505) Dist: 02920.00 Q: 47 
+angle = 292
+   thetaaa: 292.75 (506) Dist: 00000.00 Q: 0 
+angle = 293davam do 0
+   thetaaa: 292.95 (507) Dist: 02933.00 Q: 47 
+angle = 293
+   thetaaa: 293.34 (508) Dist: 00000.00 Q: 0 
+angle = 293
+   thetaaa: 293.94 (509) Dist: 00000.00 Q: 0 
+angle = 294davam do 0
+   thetaaa: 301.19 (510) Dist: 00142.00 Q: 47 
+angle = 301davam do 0
+   thetaaa: 301.80 (511) Dist: 00141.00 Q: 47 
+angle = 302davam do 0
+   thetaaa: 302.41 (512) Dist: 00125.00 Q: 47 
+angle = 302
+   thetaaa: 303.02 (513) Dist: 00122.00 Q: 47 
+angle = 303davam do 0
+   thetaaa: 305.84 (514) Dist: 00000.00 Q: 0 
+angle = 306davam do 0
+   thetaaa: 306.44 (515) Dist: 00000.00 Q: 0 
+angle = 306
+   thetaaa: 307.03 (516) Dist: 00000.00 Q: 0 
+angle = 307davam do 0
+   thetaaa: 307.62 (517) Dist: 00000.00 Q: 0 
+angle = 308davam do 0
+   thetaaa: 308.22 (518) Dist: 00000.00 Q: 0 
+angle = 308
+   thetaaa: 308.81 (519) Dist: 00000.00 Q: 0 
+angle = 309davam do 0
+   thetaaa: 309.41 (520) Dist: 00000.00 Q: 0 
+angle = 309
+   thetaaa: 310.02 (521) Dist: 00000.00 Q: 0 
+angle = 310davam do 0
+   thetaaa: 310.61 (522) Dist: 00000.00 Q: 0 
+angle = 311davam do 0
+   thetaaa: 311.20 (523) Dist: 00000.00 Q: 0 
+angle = 311
+   thetaaa: 311.80 (524) Dist: 00000.00 Q: 0 
+angle = 312davam do 0
+   thetaaa: 312.39 (525) Dist: 00000.00 Q: 0 
+angle = 312
+   thetaaa: 312.98 (526) Dist: 00000.00 Q: 0 
+angle = 313davam do 0
+   thetaaa: 313.58 (527) Dist: 00000.00 Q: 0 
+angle = 314davam do 0
+   thetaaa: 314.17 (528) Dist: 00000.00 Q: 0 
+angle = 314
+   thetaaa: 314.77 (529) Dist: 00000.00 Q: 0 
+angle = 315davam do 0
+   thetaaa: 315.36 (530) Dist: 00000.00 Q: 0 
+angle = 315
+   thetaaa: 315.95 (531) Dist: 00000.00 Q: 0 
+angle = 316davam do 0
+   thetaaa: 316.55 (532) Dist: 00000.00 Q: 0 
+angle = 317davam do 0
+   thetaaa: 317.16 (533) Dist: 00000.00 Q: 0 
+angle = 317
+   thetaaa: 317.75 (534) Dist: 00000.00 Q: 0 
+angle = 318davam do 0
+   thetaaa: 318.34 (535) Dist: 00000.00 Q: 0 
+angle = 318
+   thetaaa: 318.94 (536) Dist: 00000.00 Q: 0 
+angle = 319davam do 0
+   thetaaa: 319.53 (537) Dist: 00000.00 Q: 0 
+angle = 320davam do 0
+   thetaaa: 320.12 (538) Dist: 00000.00 Q: 0 
+angle = 320
+   thetaaa: 320.72 (539) Dist: 00000.00 Q: 0 
+angle = 321davam do 0
+   thetaaa: 321.31 (540) Dist: 00000.00 Q: 0 
+angle = 321
+   thetaaa: 321.91 (541) Dist: 00000.00 Q: 0 
+angle = 322davam do 0
+   thetaaa: 322.50 (542) Dist: 00000.00 Q: 0 
+angle = 323davam do 0
+   thetaaa: 323.09 (543) Dist: 00000.00 Q: 0 
+angle = 323
+   thetaaa: 323.69 (544) Dist: 00000.00 Q: 0 
+angle = 324davam do 0
+   thetaaa: 324.30 (545) Dist: 00000.00 Q: 0 
+angle = 324
+   thetaaa: 324.89 (546) Dist: 00000.00 Q: 0 
+angle = 325davam do 0
+   thetaaa: 325.48 (547) Dist: 00000.00 Q: 0 
+angle = 325
+   thetaaa: 326.08 (548) Dist: 00000.00 Q: 0 
+angle = 326davam do 0
+   thetaaa: 326.67 (549) Dist: 00000.00 Q: 0 
+angle = 327davam do 0
+   thetaaa: 327.27 (550) Dist: 00000.00 Q: 0 
+angle = 327
+   thetaaa: 327.86 (551) Dist: 00000.00 Q: 0 
+angle = 328davam do 0
+   thetaaa: 328.45 (552) Dist: 00000.00 Q: 0 
+angle = 328
+   thetaaa: 329.05 (553) Dist: 00000.00 Q: 0 
+angle = 329davam do 0
+   thetaaa: 329.64 (554) Dist: 00000.00 Q: 0 
+angle = 330davam do 0
+   thetaaa: 330.23 (555) Dist: 00000.00 Q: 0 
+angle = 330
+   thetaaa: 330.83 (556) Dist: 00000.00 Q: 0 
+angle = 331davam do 0
+   thetaaa: 331.44 (557) Dist: 00000.00 Q: 0 
+angle = 331
+   thetaaa: 332.03 (558) Dist: 00000.00 Q: 0 
+angle = 332davam do 0
+   thetaaa: 332.62 (559) Dist: 00000.00 Q: 0 
+angle = 333davam do 0
+   thetaaa: 333.22 (560) Dist: 00000.00 Q: 0 
+angle = 333
+   thetaaa: 333.81 (561) Dist: 00000.00 Q: 0 
+angle = 334davam do 0
+   thetaaa: 334.41 (562) Dist: 00000.00 Q: 0 
+angle = 334
+   thetaaa: 335.00 (563) Dist: 00000.00 Q: 0 
+angle = 335davam do 0
+   thetaaa: 335.59 (564) Dist: 00000.00 Q: 0 
+angle = 336davam do 0
+   thetaaa: 336.19 (565) Dist: 00000.00 Q: 0 
+angle = 336
+   thetaaa: 336.78 (566) Dist: 00000.00 Q: 0 
+angle = 337davam do 0
+   thetaaa: 337.38 (567) Dist: 00000.00 Q: 0 
+angle = 337
+   thetaaa: 337.97 (568) Dist: 00000.00 Q: 0 
+angle = 338davam do 0
+   thetaaa: 338.58 (569) Dist: 00000.00 Q: 0 
+angle = 339davam do 0
+   thetaaa: 339.17 (570) Dist: 00000.00 Q: 0 
+angle = 339
+   thetaaa: 339.77 (571) Dist: 00000.00 Q: 0 
+angle = 340davam do 0
+   thetaaa: 340.36 (572) Dist: 00000.00 Q: 0 
+angle = 340
+   thetaaa: 340.95 (573) Dist: 00000.00 Q: 0 
+angle = 341davam do 0
+   thetaaa: 341.55 (574) Dist: 00000.00 Q: 0 
+angle = 342davam do 0
+   thetaaa: 342.14 (575) Dist: 00000.00 Q: 0 
+angle = 342
+   thetaaa: 342.73 (576) Dist: 00000.00 Q: 0 
+angle = 343davam do 0
+   thetaaa: 343.33 (577) Dist: 00000.00 Q: 0 
+angle = 343
+   thetaaa: 343.92 (578) Dist: 00000.00 Q: 0 
+angle = 344davam do 0
+   thetaaa: 344.52 (579) Dist: 00000.00 Q: 0 
+angle = 345davam do 0
+   thetaaa: 345.11 (580) Dist: 00000.00 Q: 0 
+angle = 345
+   thetaaa: 345.72 (581) Dist: 00000.00 Q: 0 
+angle = 346davam do 0
+   thetaaa: 346.31 (582) Dist: 00000.00 Q: 0 
+angle = 346
+   thetaaa: 346.91 (583) Dist: 00000.00 Q: 0 
+angle = 347davam do 0
+   thetaaa: 347.50 (584) Dist: 00000.00 Q: 0 
+angle = 348davam do 0
+   thetaaa: 348.09 (585) Dist: 00000.00 Q: 0 
+angle = 348
+   thetaaa: 348.69 (586) Dist: 00000.00 Q: 0 
+angle = 349davam do 0
+   thetaaa: 349.28 (587) Dist: 00000.00 Q: 0 
+angle = 349
+   thetaaa: 349.88 (588) Dist: 00000.00 Q: 0 
+angle = 350davam do 0
+   thetaaa: 350.47 (589) Dist: 00000.00 Q: 0 
+angle = 350
+   thetaaa: 351.06 (590) Dist: 00000.00 Q: 0 
+angle = 351davam do 0
+   thetaaa: 351.66 (591) Dist: 00000.00 Q: 0 
+angle = 352davam do 0
+   thetaaa: 352.25 (592) Dist: 00000.00 Q: 0 
+angle = 352
+   thetaaa: 352.86 (593) Dist: 00000.00 Q: 0 
+angle = 353davam do 0
+   thetaaa: 353.45 (594) Dist: 00000.00 Q: 0 
+angle = 353
+   thetaaa: 354.05 (595) Dist: 00000.00 Q: 0 
+angle = 354davam do 0
+   thetaaa: 354.64 (596) Dist: 00000.00 Q: 0 
+angle = 355davam do 0
+   thetaaa: 355.23 (597) Dist: 00000.00 Q: 0 
+angle = 355
+   thetaaa: 355.83 (598) Dist: 00000.00 Q: 0 
+angle = 356davam do 0
+   thetaaa: 356.42 (599) Dist: 00000.00 Q: 0 
+angle = 356
+   thetaaa: 357.02 (600) Dist: 00000.00 Q: 0 
+angle = 357davam do 0
+   thetaaa: 357.61 (601) Dist: 00000.00 Q: 0 
+angle = 358davam do 0
+   thetaaa: 358.20 (602) Dist: 00000.00 Q: 0 
+angle = 358
+   thetaaa: 358.80 (603) Dist: 00000.00 Q: 0 
+angle = 359davam do 0
+   thetaaa: 359.39 (604) Dist: 00000.00 Q: 0 
+angle = 359
+0: 3000 cm
+1: 3000 cm
+2: 3000 cm
+3: 3000 cm
+4: 3000 cm
+5: 3000 cm
+6: 3000 cm
+7: 3000 cm
+8: 3000 cm
+9: 3000 cm
+10: 3000 cm
+11: 3000 cm
+12: 3000 cm
+13: 3000 cm
+14: 3000 cm
+15: 3000 cm
+16: 3000 cm
+17: 3000 cm
+18: 3000 cm
+19: 3000 cm
+20: 3000 cm
+21: 3000 cm
+22: 3000 cm
+23: 3000 cm
+24: 3000 cm
+25: 3000 cm
+26: 3000 cm
+27: 3000 cm
+28: 3000 cm
+29: 3000 cm
+30: 3000 cm
+31: 3000 cm
+32: 3000 cm
+33: 3000 cm
+34: 3000 cm
+35: 3000 cm
+36: 3000 cm
+37: 3000 cm
+38: 3000 cm
+39: 3000 cm
+40: 3000 cm
+41: 3000 cm
+42: 3000 cm
+43: 3000 cm
+44: 3000 cm
+45: 3000 cm
+46: 3000 cm
+47: 3000 cm
+48: 3000 cm
+49: 3000 cm
+50: 3000 cm
+51: 3000 cm
+52: 3000 cm
+53: 3000 cm
+54: 3000 cm
+55: 3000 cm
+56: 3000 cm
+57: 3000 cm
+58: 3000 cm
+59: 3000 cm
+60: 3000 cm
+61: 3000 cm
+62: 3000 cm
+63: 3000 cm
+64: 3000 cm
+65: 3000 cm
+66: 3000 cm
+67: 3000 cm
+68: 3000 cm
+69: 3000 cm
+70: 3000 cm
+71: 3000 cm
+72: 3000 cm
+73: 3000 cm
+74: 3000 cm
+75: 3000 cm
+76: 3000 cm
+77: 3000 cm
+78: 3000 cm
+79: 3000 cm
+80: 3000 cm
+81: 3000 cm
+82: 0 cm
+83: 3000 cm
+84: 3000 cm
+85: 3000 cm
+86: 3000 cm
+87: 3000 cm
+88: 3000 cm
+89: 3000 cm
+90: 3000 cm
+91: 3000 cm
+92: 3000 cm
+93: 3000 cm
+94: 3000 cm
+95: 3000 cm
+96: 3000 cm
+97: 420 cm
+98: 3000 cm
+99: 3000 cm
+100: 3000 cm
+101: 3000 cm
+102: 3000 cm
+103: 3000 cm
+104: 3000 cm
+105: 411 cm
+106: 3000 cm
+107: 414 cm
+108: 3000 cm
+109: 3000 cm
+110: 422 cm
+111: 3000 cm
+112: 3000 cm
+113: 541 cm
+114: 542 cm
+115: 544 cm
+116: 546 cm
+117: 552 cm
+118: 432 cm
+119: 420 cm
+120: 3000 cm
+121: 393 cm
+122: 376 cm
+123: 0 cm
+124: 0 cm
+125: 315 cm
+126: 592 cm
+127: 577 cm
+128: 0 cm
+129: 250 cm
+130: 604 cm
+131: 3000 cm
+132: 607 cm
+133: 614 cm
+134: 622 cm
+135: 630 cm
+136: 634 cm
+137: 643 cm
+138: 651 cm
+139: 660 cm
+140: 664 cm
+141: 674 cm
+142: 684 cm
+143: 694 cm
+144: 700 cm
+145: 712 cm
+146: 726 cm
+147: 0 cm
+148: 0 cm
+149: 0 cm
+150: 0 cm
+151: 783 cm
+152: 799 cm
+153: 829 cm
+154: 839 cm
+155: 842 cm
+156: 806 cm
+157: 820 cm
+158: 3000 cm
+159: 3000 cm
+160: 3000 cm
+161: 0 cm
+162: 0 cm
+163: 3000 cm
+164: 0 cm
+165: 3000 cm
+166: 128 cm
+167: 128 cm
+168: 3000 cm
+169: 3000 cm
+170: 0 cm
+171: 3000 cm
+172: 3000 cm
+173: 3000 cm
+174: 3000 cm
+175: 3000 cm
+176: 3000 cm
+177: 3000 cm
+178: 3000 cm
+179: 3000 cm
+180: 3000 cm
+181: 3000 cm
+182: 3000 cm
+183: 3000 cm
+184: 926 cm
+185: 3000 cm
+186: 3000 cm
+187: 919 cm
+188: 3000 cm
+189: 3000 cm
+190: 3000 cm
+191: 3000 cm
+192: 3000 cm
+193: 593 cm
+194: 615 cm
+195: 617 cm
+196: 3000 cm
+197: 634 cm
+198: 638 cm
+199: 651 cm
+200: 663 cm
+201: 3000 cm
+202: 680 cm
+203: 695 cm
+204: 711 cm
+205: 717 cm
+206: 742 cm
+207: 762 cm
+208: 768 cm
+209: 770 cm
+210: 763 cm
+211: 764 cm
+212: 766 cm
+213: 766 cm
+214: 767 cm
+215: 768 cm
+216: 772 cm
+217: 770 cm
+218: 770 cm
+219: 778 cm
+220: 724 cm
+221: 713 cm
+222: 703 cm
+223: 690 cm
+224: 686 cm
+225: 687 cm
+226: 686 cm
+227: 679 cm
+228: 680 cm
+229: 670 cm
+230: 664 cm
+231: 662 cm
+232: 676 cm
+233: 677 cm
+234: 671 cm
+235: 661 cm
+236: 653 cm
+237: 653 cm
+238: 653 cm
+239: 652 cm
+240: 653 cm
+241: 634 cm
+242: 636 cm
+243: 645 cm
+244: 669 cm
+245: 669 cm
+246: 665 cm
+247: 667 cm
+248: 715 cm
+249: 737 cm
+250: 765 cm
+251: 0 cm
+252: 0 cm
+253: 0 cm
+254: 0 cm
+255: 3295 cm
+256: 3239 cm
+257: 3208 cm
+258: 3191 cm
+259: 3171 cm
+260: 3000 cm
+261: 3000 cm
+262: 3000 cm
+263: 3000 cm
+264: 3000 cm
+265: 550 cm
+266: 536 cm
+267: 530 cm
+268: 524 cm
+269: 520 cm
+270: 519 cm
+271: 515 cm
+272: 516 cm
+273: 516 cm
+274: 513 cm
+275: 511 cm
+276: 510 cm
+277: 508 cm
+278: 509 cm
+279: 512 cm
+280: 514 cm
+281: 520 cm
+282: 533 cm
+283: 0 cm
+284: 2895 cm
+285: 2882 cm
+286: 2886 cm
+287: 2899 cm
+288: 2900 cm
+289: 2901 cm
+290: 2904 cm
+291: 2916 cm
+292: 3000 cm
+293: 3000 cm
+294: 3000 cm
+295: 0 cm
+296: 0 cm
+297: 0 cm
+298: 0 cm
+299: 0 cm
+300: 0 cm
+301: 142 cm
+302: 141 cm
+303: 122 cm
+304: 0 cm
+305: 0 cm
+306: 3000 cm
+307: 3000 cm
+308: 3000 cm
+309: 3000 cm
+310: 3000 cm
+311: 3000 cm
+312: 3000 cm
+313: 3000 cm
+314: 3000 cm
+315: 3000 cm
+316: 3000 cm
+317: 3000 cm
+318: 3000 cm
+319: 3000 cm
+320: 3000 cm
+321: 3000 cm
+322: 3000 cm
+323: 3000 cm
+324: 3000 cm
+325: 3000 cm
+326: 3000 cm
+327: 3000 cm
+328: 3000 cm
+329: 3000 cm
+330: 3000 cm
+331: 3000 cm
+332: 3000 cm
+333: 3000 cm
+334: 3000 cm
+335: 3000 cm
+336: 3000 cm
+337: 3000 cm
+338: 3000 cm
+339: 3000 cm
+340: 3000 cm
+341: 3000 cm
+342: 3000 cm
+343: 3000 cm
+344: 3000 cm
+345: 3000 cm
+346: 3000 cm
+347: 3000 cm
+348: 3000 cm
+349: 3000 cm
+350: 3000 cm
+351: 3000 cm
+352: 3000 cm
+353: 3000 cm
+354: 3000 cm
+355: 3000 cm
+356: 3000 cm
+357: 3000 cm
+358: 3000 cm
+359: 3000 cm
+Range #1
+Begin angle = 306
+Begin Distance = 3000
+End angle = 81
+End Ditstance = 3000
+Space = 5543
+----------
+Range #2
+Begin angle = 83
+Begin Distance = 3000
+End angle = 96
+End Ditstance = 3000
+Space = 679
+----------
+Range #3
+Begin angle = 98
+Begin Distance = 3000
+End angle = 104
+End Ditstance = 3000
+Space = 314
+----------
+Range #4
+Begin angle = 106
+Begin Distance = 3000
+End angle = 106
+End Ditstance = 3000
+Space = 0
+----------
+Range #5
+Begin angle = 108
+Begin Distance = 3000
+End angle = 109
+End Ditstance = 3000
+Space = 52
+----------
+Range #6
+Begin angle = 111
+Begin Distance = 3000
+End angle = 112
+End Ditstance = 3000
+Space = 52
+----------
+Range #7
+Begin angle = 120
+Begin Distance = 3000
+End angle = 120
+End Ditstance = 3000
+Space = 0
+----------
+Range #8
+Begin angle = 131
+Begin Distance = 3000
+End angle = 131
+End Ditstance = 3000
+Space = 0
+----------
+Range #9
+Begin angle = 158
+Begin Distance = 3000
+End angle = 160
+End Ditstance = 3000
+Space = 104
+----------
+Range #10
+Begin angle = 163
+Begin Distance = 3000
+End angle = 163
+End Ditstance = 3000
+Space = 0
+----------
+Range #11
+Begin angle = 165
+Begin Distance = 3000
+End angle = 165
+End Ditstance = 3000
+Space = 0
+----------
+Range #12
+Begin angle = 168
+Begin Distance = 3000
+End angle = 169
+End Ditstance = 3000
+Space = 52
+----------
+Range #13
+Begin angle = 171
+Begin Distance = 3000
+End angle = 183
+End Ditstance = 3000
+Space = 627
+----------
+Range #14
+Begin angle = 185
+Begin Distance = 3000
+End angle = 186
+End Ditstance = 3000
+Space = 52
+----------
+Range #15
+Begin angle = 188
+Begin Distance = 3000
+End angle = 192
+End Ditstance = 3000
+Space = 209
+----------
+Range #16
+Begin angle = 196
+Begin Distance = 3000
+End angle = 196
+End Ditstance = 3000
+Space = 0
+----------
+Range #17
+Begin angle = 201
+Begin Distance = 3000
+End angle = 201
+End Ditstance = 3000
+Space = 0
+----------
+Range #18
+Begin angle = 255
+Begin Distance = 3295
+End angle = 264
+End Ditstance = 3000
+Space = 574
+----------
+Range #19
+Begin angle = 284
+Begin Distance = 2895
+End angle = 294
+End Ditstance = 3000
+Space = 524
+----------
+Range #1
+Begin angle = 306
+Begin Distance = 3000
+End angle = 81
+End Ditstance = 3000
+Space = 5543
+----------
+Range #2
+Begin angle = 83
+Begin Distance = 3000
+End angle = 96
+End Ditstance = 3000
+Space = 679
+----------
+Range #3
+Begin angle = 171
+Begin Distance = 3000
+End angle = 183
+End Ditstance = 3000
+Space = 627
+----------
+Range #4
+Begin angle = 255
+Begin Distance = 3295
+End angle = 264
+End Ditstance = 3000
+Space = 574
+----------
+Range #5
+Begin angle = 284
+Begin Distance = 2895
+End angle = 294
+End Ditstance = 3000
+Space = 524
+----------
